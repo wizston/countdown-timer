@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="375.0" prefWidth="600.0" style="-fx-background-color: #303038;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <AnchorPane layoutX="25.0" layoutY="14.0">
+            <children>
+               <Label text="Showing" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               <Pane layoutY="23.0" prefHeight="288.0" prefWidth="550.0" style="-fx-background-color: #181e24;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0">
+                  <AnchorPane layoutX="1.0" layoutY="14.0">
+                     <children>
+                        <Label fx:id="labelLiveTimer" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutY="21.0" prefHeight="131.0" prefWidth="526.0" text="00:00:00" textAlignment="CENTER" textFill="#e5e5e5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="21.0">
+                           <font>
+                              <Font name="Georgia" size="114.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="24.0" layoutY="-34.0" text="Sermon" textFill="WHITE" AnchorPane.bottomAnchor="163.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="-34.0">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelShowingMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="152.0" prefHeight="17.0" prefWidth="512.0" textAlignment="CENTER" textFill="#ffee00" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="152.0">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="currentTimeLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="445.0" layoutY="232.0" text="00:00:00" textAlignment="RIGHT" textFill="#8d8d8d">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </Pane>
+               <Button layoutY="322.0" mnemonicParsing="false" onAction="#startTimer" style="-fx-background-color: #181e24;" text="Start" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+               <Button layoutX="46.0" layoutY="322.0" mnemonicParsing="false" onAction="#stopTimer" style="-fx-background-color: #181e24;" text="Pause" textFill="WHITE" />
+               <Button layoutX="119.0" layoutY="322.0" mnemonicParsing="false" onAction="#resetTimer" style="-fx-background-color: #181e24;" text="Restart" textFill="WHITE" />
+               <Button layoutX="193.0" layoutY="322.0" mnemonicParsing="false" onAction="#clearMessage" style="-fx-background-color: #181e24;" text="Clear Message" textFill="WHITE" />
+            </children>
+         </AnchorPane>
+      </Pane>
+   </children>
+</AnchorPane>
