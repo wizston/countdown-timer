@@ -7,11 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="IsakaCountdownTimer" />
+        <module name="WizstonCountdownTimer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="IsakaCountdownTimer" target="11" />
+      <module name="WizstonCountdownTimer" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,4 +1,4 @@
-module org.anelda.isakacountdowntimer {
+module org.anelda.wizston.countdowntimer {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -12,11 +12,11 @@ module org.anelda.isakacountdowntimer {
     requires java.sql;
     requires org.xerial.sqlitejdbc;
 
-    opens org.anelda.isakacountdowntimer to javafx.fxml;
-    exports org.anelda.isakacountdowntimer;
-    exports org.anelda.isakacountdowntimer.model;
-    exports org.anelda.isakacountdowntimer.output;
-    exports org.anelda.isakacountdowntimer.preset;
-    exports org.anelda.isakacountdowntimer.preview;
-    exports org.anelda.isakacountdowntimer.option;
+    opens org.anelda.wizston.countdowntimer to javafx.fxml;
+    exports org.anelda.wizston.countdowntimer;
+    exports org.anelda.wizston.countdowntimer.model;
+    exports org.anelda.wizston.countdowntimer.output;
+    exports org.anelda.wizston.countdowntimer.preset;
+    exports org.anelda.wizston.countdowntimer.preview;
+    exports org.anelda.wizston.countdowntimer.option;
 }

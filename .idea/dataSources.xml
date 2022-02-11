@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:src/main/java/org/anelda/isakacountdowntimer/database/test.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="nnFPNxpz16fY13Lusvt9.db" uuid="997d0227-e0f4-496d-bd6f-98133dea826a">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/src/main/java/org/anelda/wizston/countdowntimer/database/nnFPNxpz16fY13Lusvt9.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
