@@ -29,8 +29,13 @@ public class OutputWrapperController {
     public Label currentTimeLabel;
     @FXML
     public Label labelShowingMessage;
+    @FXML
+    public Label labelTitle;
 
-    public final ObjectProperty<Font> fontTracking = new SimpleObjectProperty<Font>(Font.getDefault());
+    public final ObjectProperty<Font> liveTimerFontTracking = new SimpleObjectProperty<Font>(Font.getDefault());
+    public final ObjectProperty<Font> messageFontTracking = new SimpleObjectProperty<Font>(Font.getDefault());
+    public final ObjectProperty<Font> currentTimeFontTracking = new SimpleObjectProperty<Font>(Font.getDefault());
+    public final ObjectProperty<Font> titleFontTracking = new SimpleObjectProperty<Font>(Font.getDefault());
 
 
     private int[] init;
@@ -44,12 +49,21 @@ public class OutputWrapperController {
         this.model = model;
 
         currentTimeLabel.textProperty().bind(model.getCurrentMoment().currentTimeValue);
+        currentTimeFontTracking.set(Font.font(26));
+        currentTimeLabel.fontProperty().bind(currentTimeFontTracking);
 
         labelLiveTimer.textProperty().bind(model.getCurrentMoment().outputTimeValue);
-        labelLiveTimer.fontProperty().bind(fontTracking);
-        fontTracking.set(Font.font(114));
+        liveTimerFontTracking.set(Font.font(114));
+        labelLiveTimer.fontProperty().bind(liveTimerFontTracking);
+
 
         labelShowingMessage.textProperty().bind(model.getCurrentMoment().alertMessage);
+        messageFontTracking.set(Font.font(26));
+        labelShowingMessage.fontProperty().bind(messageFontTracking);
+
+        labelTitle.textProperty().bind(model.getCurrentMoment().timerTitle);
+        titleFontTracking.set(Font.font(19));
+        labelTitle.fontProperty().bind(titleFontTracking);
 
         startClock();
         startTimer();

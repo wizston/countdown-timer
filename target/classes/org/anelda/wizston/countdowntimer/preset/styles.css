@@ -41,3 +41,13 @@
    .list-view .list-cell:filled:selected .email-view {
        -fx-background-color: green;
    }
+
+.timePresetButtons {
+    -fx-background-radius: 13px;
+    -fx-border-radius: 13px;
+    -fx-border-width: 1px;
+    -fx-border-color: #737373;
+    -fx-background-color: #4F4F4F;
+    -fx-color: #FFFFFF;
+    -fx-text-fill: white;
+}

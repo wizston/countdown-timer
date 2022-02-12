@@ -7,6 +7,9 @@ import javafx.beans.property.*;
 public class Moment {
 
     public final SimpleStringProperty previewTimeValue = new SimpleStringProperty("00:00:00");
+    public final SimpleStringProperty previewTimeHourValue = new SimpleStringProperty("00");
+    public final SimpleStringProperty previewTimeMinValue = new SimpleStringProperty("00");
+    public final SimpleStringProperty previewTimeSecValue = new SimpleStringProperty("00");
     private final IntegerProperty previewTimeHour = new SimpleIntegerProperty();
     private final IntegerProperty previewTimeMin = new SimpleIntegerProperty();
     private final IntegerProperty previewTimeSec = new SimpleIntegerProperty();
@@ -20,6 +23,8 @@ public class Moment {
     private final IntegerProperty second = new SimpleIntegerProperty();
 
     public final SimpleStringProperty alertMessage = new SimpleStringProperty();
+
+    public final SimpleStringProperty timerTitle = new SimpleStringProperty("Praise & Worship");
 
     private final BooleanProperty timerRunning = new SimpleBooleanProperty(false);
 
@@ -122,14 +127,34 @@ public class Moment {
     public SimpleStringProperty previewTimeValueProperty() {
         return previewTimeValue;
     }
+    public SimpleStringProperty previewTimeHourValueProperty() {
+        return previewTimeHourValue;
+    }
+    public SimpleStringProperty previewTimeMinValueProperty() {
+        return previewTimeMinValue;
+    }
+    public SimpleStringProperty previewTimeSecValueProperty() {
+        return previewTimeSecValue;
+    }
 
     public String getPreviewTimeValue() {
         return previewTimeValueProperty().get();
     }
 
     public final void setPreviewTimeValue(String value) {
-
         previewTimeValueProperty().set(value);
+    }
+
+    public final void setPreviewTimeHourValue(String value) {
+        previewTimeHourValueProperty().set(value);
+    }
+
+    public final void setPreviewTimeMinValue(String value) {
+        previewTimeMinValueProperty().set(value);
+    }
+
+    public final void setPreviewTimeSecValue(String value) {
+        previewTimeSecValueProperty().set(value);
     }
 
     //OUTPUT

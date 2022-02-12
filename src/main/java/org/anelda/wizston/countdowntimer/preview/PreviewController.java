@@ -12,9 +12,6 @@ public class PreviewController {
 
     private DataModel model;
 
-
-    @FXML
-    public Label labelPreviewTimer;
     @FXML
     public Button increaseHourBtn;
     @FXML
@@ -25,7 +22,15 @@ public class PreviewController {
     public Button decreaseMinuteBtn;
 
     @FXML
+    public Button simplePreset1, simplePreset2, simplePreset3, simplePreset4;
+
+    @FXML
     public TextField txtPreviewMessage;
+
+    @FXML
+    public Label labelPreviewHour;
+    public Label labelPreviewMin;
+    public Label labelPreviewSec;
 
     @FXML
     public void initialize() {
@@ -33,6 +38,18 @@ public class PreviewController {
         decreaseHourBtn.setOnAction(new EventHandler() {@Override public void handle(Event event) {decrementHour();} });
         increaseMinuteBtn.setOnAction(new EventHandler() {@Override public void handle(Event event) {incrementMinute();} });
         decreaseMinuteBtn.setOnAction(new EventHandler() {@Override public void handle(Event event) {decrementMinute();} });
+
+        simplePreset1.setOnAction(new EventHandler() {@Override public void handle(Event event) {setPresetTime(0, 5);} });
+        simplePreset2.setOnAction((EventHandler) event -> setPresetTime(0, 10));
+        simplePreset3.setOnAction((EventHandler) event -> setPresetTime(0, 25));
+        simplePreset4.setOnAction((EventHandler) event -> setPresetTime(0, 45));
+    }
+
+    private void setPresetTime(int hour, int min) {
+
+        this.model.getCurrentMoment().previewTimeHourProperty().setValue(hour);
+        this.model.getCurrentMoment().previewTimeMinProperty().setValue(min);
+        setPreview();
     }
 
     public void initModel(DataModel model) {
@@ -64,10 +81,14 @@ public class PreviewController {
 
 
     public void setPreview() {
-        model.getCurrentMoment().setPreviewTimeValue((String.format("%d:%02d:%02d", this.model.getCurrentMoment().previewTimeHourProperty().getValue(), this.model.getCurrentMoment().previewTimeMinProperty().getValue(), this.model.getCurrentMoment().previewTimeSecProperty().getValue())));
+        model.getCurrentMoment().setPreviewTimeHourValue((String.format("%02d", this.model.getCurrentMoment().previewTimeHourProperty().getValue())));
+        model.getCurrentMoment().setPreviewTimeMinValue((String.format("%02d", this.model.getCurrentMoment().previewTimeMinProperty().getValue())));
+        model.getCurrentMoment().setPreviewTimeSecValue((String.format("%02d", this.model.getCurrentMoment().previewTimeSecProperty().getValue())));
 
         this.model.getCurrentMoment().previewTimeSecProperty().setValue(0);
-        labelPreviewTimer.textProperty().bind(model.getCurrentMoment().previewTimeValue);
+        labelPreviewHour.textProperty().bind(model.getCurrentMoment().previewTimeHourValue);
+        labelPreviewMin.textProperty().bind(model.getCurrentMoment().previewTimeMinValue);
+        labelPreviewSec.textProperty().bind(model.getCurrentMoment().previewTimeSecValue);
     }
 
 

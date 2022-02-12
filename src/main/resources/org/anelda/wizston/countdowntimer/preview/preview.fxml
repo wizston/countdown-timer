@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -8,15 +9,119 @@
    <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="600.0" scaleShape="false" style="-fx-background-color: #303038;">
       <Label layoutX="28.0" layoutY="14.0" text="Preview" textFill="WHITE" />
       <Pane layoutX="25.0" layoutY="37.0" prefHeight="288.0" prefWidth="550.0" style="-fx-background-color: #181e24;">
-         <Label fx:id="labelPreviewTimer" layoutX="56.0" layoutY="37.0" text="2:34:00" textFill="#e5e5e5">
+         <Label fx:id="labelPreviewHour" layoutX="47.0" layoutY="31.0" text="02" textFill="#e5e5e5">
             <font>
                <Font name="Fira Code Medium" size="96.0" />
             </font>
          </Label>
-         <Button fx:id="increaseHourBtn" layoutX="56.0" layoutY="165.0" mnemonicParsing="false" text="^" />
-         <Button fx:id="decreaseHourBtn" layoutX="56.0" layoutY="198.0" mnemonicParsing="false" text="v" />
-         <Button fx:id="increaseMinuteBtn" layoutX="199.0" layoutY="165.0" mnemonicParsing="false" text="^" />
-         <Button fx:id="decreaseMinuteBtn" layoutX="199.0" layoutY="198.0" mnemonicParsing="false" text="v" />
+         <Label fx:id="labelPreviewMin" layoutX="214.0" layoutY="31.0" text="34" textFill="#e5e5e5">
+            <font>
+               <Font name="Fira Code Medium" size="96.0" />
+            </font>
+         </Label>
+         <Label fx:id="labelPreviewSec" layoutX="380.0" layoutY="31.0" text="00" textFill="#e5e5e5">
+            <font>
+               <Font name="Fira Code Medium" size="96.0" />
+            </font>
+         </Label>
+         <Button fx:id="increaseHourBtn" layoutX="167.0" layoutY="69.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <graphic>
+               <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/arrowUp.png" />
+               </ImageView>
+            </graphic></Button>
+         <Button fx:id="decreaseHourBtn" layoutX="167.0" layoutY="113.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <graphic>
+               <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/arrowDown.png" />
+               </ImageView>
+            </graphic></Button>
+         <Button fx:id="increaseMinuteBtn" layoutX="333.0" layoutY="65.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <graphic>
+               <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/arrowUp.png" />
+               </ImageView>
+            </graphic></Button>
+         <Button fx:id="decreaseMinuteBtn" layoutX="333.0" layoutY="110.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <graphic>
+               <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/arrowDown.png" />
+               </ImageView>
+            </graphic></Button>
+         <Label layoutX="84.0" layoutY="138.0" text="Hour" textFill="#959595">
+            <font>
+               <Font size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="248.0" layoutY="138.0" text="Minute" textFill="#959595">
+            <font>
+               <Font size="17.0" />
+            </font>
+         </Label>
+         <Button fx:id="simplePreset1" layoutX="47.0" layoutY="233.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="98.0" styleClass="timePresetButtons" stylesheets="@../preset/styles.css" textFill="TRANSPARENT">
+
+            <graphic>
+               <VBox>
+                  <children>
+                     <Label alignment="CENTER" prefHeight="26.0" prefWidth="84.0" text="00:05:00" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                           <Font size="13.0" />
+                        </font></Label>
+                  </children>
+               </VBox>
+         </graphic>
+            <font>
+               <Font size="9.0" />
+            </font>
+         </Button>
+         <Button fx:id="simplePreset2" layoutX="165.0" layoutY="233.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="98.0" styleClass="timePresetButtons" stylesheets="@../preset/styles.css" textFill="TRANSPARENT">
+            <graphic>
+               <VBox>
+                  <children>
+                     <Label alignment="CENTER" prefHeight="26.0" prefWidth="84.0" text="00:10:00" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                           <Font size="13.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </VBox>
+            </graphic>
+            <font>
+               <Font size="9.0" />
+            </font>
+         </Button>
+         <Button fx:id="simplePreset3" layoutX="285.0" layoutY="233.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="98.0" styleClass="timePresetButtons" stylesheets="@../preset/styles.css" textFill="TRANSPARENT">
+            <graphic>
+               <VBox>
+                  <children>
+                     <Label alignment="CENTER" prefHeight="26.0" prefWidth="84.0" text="00:25:00" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                           <Font size="13.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </VBox>
+            </graphic>
+            <font>
+               <Font size="9.0" />
+            </font>
+         </Button>
+         <Button fx:id="simplePreset4" layoutX="400.0" layoutY="233.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="98.0" styleClass="timePresetButtons" stylesheets="@../preset/styles.css" textFill="TRANSPARENT">
+            <graphic>
+               <VBox>
+                  <children>
+                     <Label alignment="CENTER" prefHeight="26.0" prefWidth="84.0" text="00:45:00" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                           <Font size="13.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </VBox>
+            </graphic>
+            <font>
+               <Font size="9.0" />
+            </font>
+         </Button>
       </Pane>
       <TextField fx:id="txtPreviewMessage" layoutX="25.0" layoutY="336.0" prefHeight="25.0" prefWidth="353.0" style="-fx-background-color: #181e24; -fx-text-inner-color: #FFFFFF;" />
       <Button layoutX="390.0" layoutY="336.0" mnemonicParsing="false" onAction="#showMessage" style="-fx-background-color: #181e24;" text="Send" textFill="WHITE">

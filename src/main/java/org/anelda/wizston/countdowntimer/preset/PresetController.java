@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -15,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.anelda.wizston.countdowntimer.HelloApplication;
@@ -46,7 +48,7 @@ public class PresetController {
         }
         this.model = model ;
 
-        externalDisplay();
+        externalDisplay(true);
 
         hourValue.bind(this.model.getCurrentMoment().currentTimeValueProperty());
         labelTest2.textProperty().bind(hourValue);
@@ -83,17 +85,25 @@ public class PresetController {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldWidth, Number newWidth)
             {
-                mainOutputController.fontTracking.set(Font.font(newWidth.doubleValue() / 5));
+                mainOutputController.liveTimerFontTracking.set(Font.font(newWidth.doubleValue() / 5));
+                mainOutputController.messageFontTracking.set(Font.font(newWidth.doubleValue() / 20));
+                mainOutputController.currentTimeFontTracking.set(Font.font(newWidth.doubleValue() / 40));
+                mainOutputController.titleFontTracking.set(Font.font(newWidth.doubleValue() / 40));
             }
         });
 
         Stage primaryStage2 = new Stage();
         Scene scene2 = new Scene(mainOutputNode);
 
+        ObservableList<Screen> screens = Screen.getScreens();//Get list of Screens
+
         primaryStage2.setScene(scene2);
         primaryStage2.setTitle("Fullscreen - Wizston:Countdown Timer 0.1");
 
         if (fullScreen) {
+            Rectangle2D bounds = screens.get(screens.size() - 1).getVisualBounds();
+            primaryStage2.setX(bounds.getMinX());
+            primaryStage2.setY(bounds.getMinY());
             primaryStage2.setFullScreen(true);
             primaryStage2.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         }
