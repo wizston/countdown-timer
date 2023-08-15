@@ -122,6 +122,11 @@
                <Font size="9.0" />
             </font>
          </Button>
+         <Label fx:id="previewTimerTitle" layoutX="14.0" layoutY="14.0" text="Label" textFill="#c6c6c6">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
       </Pane>
       <TextField fx:id="txtPreviewMessage" layoutX="25.0" layoutY="336.0" prefHeight="25.0" prefWidth="353.0" style="-fx-background-color: #181e24; -fx-text-inner-color: #FFFFFF;" />
       <Button layoutX="390.0" layoutY="336.0" mnemonicParsing="false" onAction="#showMessage" style="-fx-background-color: #181e24;" text="Send" textFill="WHITE">

@@ -8,7 +8,7 @@
     -fx-control-inner-background: transparent;
     -fx-control-inner-background-alt: -fx-control-inner-background;
     -fx-background-color: transparent;
-    -fx-padding: 0;
+    /*-fx-padding: 0;*/
     -fx-fit-to-width: true;
     -fx-effect: null;
     -fx-selection-bar: transparent;

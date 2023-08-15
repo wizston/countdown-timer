@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: org.anelda.wizston.countdowntimer.MainTimerView
+Class-Path: org/anelda/wizston/countdowntimer
+JavaFX-Application-Class: org.anelda.wizston.countdowntimer.MainTimerView
+JavaFX-Class-Path: org/anelda/wizston/countdowntimer

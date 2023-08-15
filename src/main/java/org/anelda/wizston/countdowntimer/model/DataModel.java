@@ -8,8 +8,8 @@ import javafx.collections.ObservableList;
 
 public class DataModel {
     private final ObservableList<Moment> momentList = FXCollections.observableArrayList(moment ->
-            new Observable[] {moment.hourProperty(), moment.minuteProperty(), moment.secondProperty(),
-                    moment.previewTimeValueProperty(), moment.previewTimeHourProperty(), moment.previewTimeMinProperty(), moment.previewTimeSecProperty(),
+            new Observable[] {moment.timerTitleProperty(), moment.hourProperty(), moment.minuteProperty(), moment.secondProperty(),
+                    moment.previewTimerTitleProperty(), moment.previewTimeValueProperty(), moment.previewTimeHourProperty(), moment.previewTimeMinProperty(), moment.previewTimeSecProperty(),
                     moment.outputTimeValueProperty(), moment.currentTimeValueProperty(), moment.alertMessageProperty(), moment.timerRunningProperty()});
 
     private final ObjectProperty<Moment> currentMoment = new SimpleObjectProperty<>(null);
@@ -24,6 +24,9 @@ public class DataModel {
 
     public final void setCurrentMoment(Moment moment) {
         currentMomentProperty().set(moment);
+
+        // set initial value for reset purpose
+        getCurrentMoment().setInitTimeValue();
     }
 
     public ObservableList<Moment> getMomentList() {

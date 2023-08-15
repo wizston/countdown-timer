@@ -1,15 +1,18 @@
 package org.anelda.wizston.countdowntimer;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import org.anelda.wizston.countdowntimer.model.DataModel;
 import org.anelda.wizston.countdowntimer.model.Moment;
@@ -112,11 +115,25 @@ public class MainTimerView extends Application  {
 
         Scene scene = new Scene(rootGrid);
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image("/logo.png"));
         primaryStage.setTitle("Wizston:Countdown Timer 0.1");
+        primaryStage.setResizable(false);
         primaryStage.show();
 
+        //Close every other windows when main window closes
+        primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
     }
 
+    private void closeWindowEvent(WindowEvent event) {
+        System.out.println("Window close request ...");
+        Platform.exit();
+    }
+
+    @Override
+    public void stop(){
+        System.out.println("Stage is closing");
+        Platform.exit();
+    }
     public static void main(String[] args) {
         launch();
     }

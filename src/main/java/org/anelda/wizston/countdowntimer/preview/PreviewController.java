@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.anelda.wizston.countdowntimer.model.DataModel;
+import org.anelda.wizston.countdowntimer.output.OutputController;
 
 public class PreviewController {
 
@@ -28,9 +29,10 @@ public class PreviewController {
     public TextField txtPreviewMessage;
 
     @FXML
-    public Label labelPreviewHour;
-    public Label labelPreviewMin;
-    public Label labelPreviewSec;
+    public Label previewTimerTitle, labelPreviewHour, labelPreviewMin, labelPreviewSec;
+
+//    @FXML
+//    public OutputController outputController;
 
     @FXML
     public void initialize() {
@@ -50,6 +52,12 @@ public class PreviewController {
         this.model.getCurrentMoment().previewTimeHourProperty().setValue(hour);
         this.model.getCurrentMoment().previewTimeMinProperty().setValue(min);
         setPreview();
+        //Reset timer tile text to blank
+        model.getCurrentMoment().previewTimerTitle.set("");
+
+        //Reset play-pause buttons
+//        outputController.pauseTimeBtn.setVisible(true);
+//        outputController.startTimeBtn.setVisible(false);
     }
 
     public void initModel(DataModel model) {
@@ -59,16 +67,29 @@ public class PreviewController {
         this.model = model ;
 
         setPreview();
+
+        previewTimerTitle.textProperty().bind(model.getCurrentMoment().previewTimerTitle);
+        labelPreviewHour.textProperty().bind(model.getCurrentMoment().previewTimeHourValue);
+        labelPreviewMin.textProperty().bind(model.getCurrentMoment().previewTimeMinValue);
+        labelPreviewSec.textProperty().bind(model.getCurrentMoment().previewTimeSecValue);
     }
 
     public void setOutputTime() {
+        this.model.getCurrentMoment().setTimerTitle(this.model.getCurrentMoment().previewTimerTitle.get());
         this.model.getCurrentMoment().setHour(this.model.getCurrentMoment().getPreviewTimeHour());
         this.model.getCurrentMoment().setMinute(this.model.getCurrentMoment().getPreviewTimeMin());
         this.model.getCurrentMoment().setSecond(this.model.getCurrentMoment().getPreviewTimeSec());
 
         model.getCurrentMoment().setOutputTimeValue((String.format("%d:%02d:%02d", this.model.getCurrentMoment().getHour(), this.model.getCurrentMoment().previewTimeMinProperty().getValue(), this.model.getCurrentMoment().previewTimeSecProperty().getValue())));
 
+        // set initial value for reset purpose
+        this.model.getCurrentMoment().setInitTimeValue();
+
         model.getCurrentMoment().timeline.play();
+        model.getCurrentMoment().setTimerRunning(true);
+
+        //Reset play-pause buttons
+//        outputController.resetPausePlayButtons();
     }
 
     public void showMessage() {
@@ -81,20 +102,24 @@ public class PreviewController {
 
 
     public void setPreview() {
-        model.getCurrentMoment().setPreviewTimeHourValue((String.format("%02d", this.model.getCurrentMoment().previewTimeHourProperty().getValue())));
-        model.getCurrentMoment().setPreviewTimeMinValue((String.format("%02d", this.model.getCurrentMoment().previewTimeMinProperty().getValue())));
-        model.getCurrentMoment().setPreviewTimeSecValue((String.format("%02d", this.model.getCurrentMoment().previewTimeSecProperty().getValue())));
+        updatePreviewValues(model);
+    }
 
-        this.model.getCurrentMoment().previewTimeSecProperty().setValue(0);
-        labelPreviewHour.textProperty().bind(model.getCurrentMoment().previewTimeHourValue);
-        labelPreviewMin.textProperty().bind(model.getCurrentMoment().previewTimeMinValue);
-        labelPreviewSec.textProperty().bind(model.getCurrentMoment().previewTimeSecValue);
+    public static void updatePreviewValues(DataModel model) {
+
+        model.getCurrentMoment().setPreviewTimeHourValue((String.format("%02d", model.getCurrentMoment().previewTimeHourProperty().getValue())));
+        model.getCurrentMoment().setPreviewTimeMinValue((String.format("%02d", model.getCurrentMoment().previewTimeMinProperty().getValue())));
+        model.getCurrentMoment().setPreviewTimeSecValue((String.format("%02d", model.getCurrentMoment().previewTimeSecProperty().getValue())));
+
+        model.getCurrentMoment().previewTimeSecProperty().setValue(0);
     }
 
 
     public void incrementHour() {
         this.model.getCurrentMoment().previewTimeHourProperty().setValue(model.getCurrentMoment().getPreviewTimeHour() + 1);
         setPreview();
+        //Reset timer tile text to blank
+        model.getCurrentMoment().previewTimerTitle.set("");
     }
 
     public void decrementHour() {
@@ -102,6 +127,8 @@ public class PreviewController {
         if (hour > 0) {
             this.model.getCurrentMoment().previewTimeHourProperty().setValue(hour - 1);
             setPreview();
+            //Reset timer tile text to blank
+            model.getCurrentMoment().previewTimerTitle.set("");
         }
     }
 
@@ -110,6 +137,8 @@ public class PreviewController {
         if (min < 60) {
             this.model.getCurrentMoment().previewTimeMinProperty().setValue(min + 1);
             setPreview();
+            //Reset timer tile text to blank
+            model.getCurrentMoment().previewTimerTitle.set("");
         }
     }
 
@@ -118,6 +147,8 @@ public class PreviewController {
         if (min > 0) {
             this.model.getCurrentMoment().previewTimeMinProperty().setValue(min - 1);
             setPreview();
+            //Reset timer tile text to blank
+            model.getCurrentMoment().previewTimerTitle.set("");
         }
     }
 }

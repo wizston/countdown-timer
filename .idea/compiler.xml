@@ -7,11 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="WizstonCountdownTimer" />
+        <module name="IsakaCountdownTimer" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="WizstonCountdownTimer" target="11" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="17" />
+  </component>
+  <component name="JavacSettings">
+    <option name="PREFER_TARGET_JDK_COMPILER" value="false" />
   </component>
 </project>

@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class MainTimerController implements Initializable {
     private void init() throws IOException {
         startTimer();
         ///startOnDisplay();
-        externalDisplay();
+//        externalDisplay();
     }
 
     @Override
@@ -259,6 +260,7 @@ public class MainTimerController implements Initializable {
         root.getChildren().add(new VBox(btn, btn2));
 
         Scene scene = new Scene(root, 300, 250);
+
 
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="213.0" prefWidth="346.0" style="-fx-background-color: #303038;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.anelda.wizston.countdowntimer.preset.PresetController">
+   <children>
+      <TextField layoutX="44.0" layoutY="41.0" prefHeight="25.0" prefWidth="257.0" promptText="Title" style="-fx-background-color: #181e24;" />
+      <TextField layoutX="44.0" layoutY="80.0" prefHeight="25.0" prefWidth="76.0" promptText="Hour" style="-fx-background-color: #181e24;" />
+      <TextField layoutX="135.0" layoutY="80.0" prefHeight="25.0" prefWidth="76.0" promptText="Minute" style="-fx-background-color: #181e24;" />
+      <TextField layoutX="225.0" layoutY="80.0" prefHeight="25.0" prefWidth="76.0" promptText="Hour" style="-fx-background-color: #181e24;" />
+      <Button layoutX="145.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #181e24;" text="CLOSE" textFill="RED">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
+      <Button layoutX="100.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" style="-fx-background-color: #181e24;" text="SAVE NEW PRESET" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font></Button>
+      <Label layoutX="114.0" layoutY="10.0" text="ADD NEW PRESET" textFill="#939e93">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

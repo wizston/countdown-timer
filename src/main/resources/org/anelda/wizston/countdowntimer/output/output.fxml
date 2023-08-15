@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane style="-fx-background-color: #303038;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.anelda.wizston.countdowntimer.output.OutputController">
+<AnchorPane style="-fx-background-color: #303038;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.anelda.wizston.countdowntimer.output.OutputController">
    <children>
       <Pane prefHeight="375.0" prefWidth="600.0" style="-fx-background-color: #303038;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <AnchorPane layoutX="15.0" layoutY="14.0" prefHeight="341.0" prefWidth="582.0">
@@ -14,10 +15,28 @@
                   </children>
                </Pane>
                <Label text="Showing" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               <Button layoutY="322.0" mnemonicParsing="false" onAction="#startTimer" style="-fx-background-color: #181e24;" text="Start" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
-               <Button layoutX="46.0" layoutY="322.0" mnemonicParsing="false" onAction="#stopTimer" style="-fx-background-color: #181e24;" text="Pause" textFill="WHITE" />
-               <Button layoutX="119.0" layoutY="322.0" mnemonicParsing="false" onAction="#resetTimer" style="-fx-background-color: #181e24;" text="Restart" textFill="WHITE" />
-               <Button layoutX="193.0" layoutY="322.0" mnemonicParsing="false" onAction="#clearMessage" style="-fx-background-color: #181e24;" text="Clear Message" textFill="WHITE" />
+               <Button fx:id="startTimeBtn" layoutY="322.0" mnemonicParsing="false" onAction="#startTimer" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #181e24;" textFill="WHITE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0">
+                  <graphic>
+                     <ImageView fitHeight="22.0" fitWidth="225.0" preserveRatio="true">
+                        <Image url="@/play.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button fx:id="pauseTimeBtn" layoutY="322.0" mnemonicParsing="false" onAction="#stopTimer" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #181e24;" textFill="WHITE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0">
+                  <graphic>
+                     <ImageView fitHeight="22.0" fitWidth="225.0" preserveRatio="true">
+                        <Image url="@/pause.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="94.0" layoutY="322.0" mnemonicParsing="false" onAction="#resetTimer" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #181e24;" textFill="WHITE">
+                  <graphic>
+                     <ImageView fitHeight="22.0" fitWidth="225.0" preserveRatio="true">
+                        <Image url="@/replay.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button layoutX="189.0" layoutY="322.0" mnemonicParsing="false" onAction="#clearMessage" prefHeight="30.0" prefWidth="93.0" style="-fx-background-color: #181e24;" text="Clear Message" textFill="WHITE" />
             </children>
          </AnchorPane>
       </Pane>

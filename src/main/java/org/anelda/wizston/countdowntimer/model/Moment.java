@@ -2,10 +2,12 @@ package org.anelda.wizston.countdowntimer.model;
 
 import javafx.animation.Timeline;
 import javafx.beans.property.*;
+import javafx.scene.paint.Color;
 
 
 public class Moment {
 
+    public final SimpleStringProperty previewTimerTitle = new SimpleStringProperty("");
     public final SimpleStringProperty previewTimeValue = new SimpleStringProperty("00:00:00");
     public final SimpleStringProperty previewTimeHourValue = new SimpleStringProperty("00");
     public final SimpleStringProperty previewTimeMinValue = new SimpleStringProperty("00");
@@ -16,7 +18,10 @@ public class Moment {
 
 
     public final SimpleStringProperty outputTimeValue = new SimpleStringProperty("00:00:00");
+
+    public final ObjectProperty<Color> colorProp = new SimpleObjectProperty<>(Color.valueOf("#e5e5e5"));
     public final SimpleStringProperty currentTimeValue = new SimpleStringProperty("00:00:00");
+    public int[] initTimeValue = new int[]{0, 0, 0};
 
     private final IntegerProperty hour = new SimpleIntegerProperty();
     private final IntegerProperty minute = new SimpleIntegerProperty();
@@ -24,7 +29,7 @@ public class Moment {
 
     public final SimpleStringProperty alertMessage = new SimpleStringProperty();
 
-    public final SimpleStringProperty timerTitle = new SimpleStringProperty("Praise & Worship");
+    public final SimpleStringProperty timerTitle = new SimpleStringProperty("");
 
     private final BooleanProperty timerRunning = new SimpleBooleanProperty(false);
 
@@ -82,6 +87,13 @@ public class Moment {
     }
 
 
+    public final String getTimerTitleProperty() {
+        return timerTitleProperty().get();
+    }
+
+    public final void setTimerTitle(String title) {
+        this.timerTitleProperty().set(title);
+    }
 
     public final int getHour() {
         return hourProperty().get();
@@ -89,6 +101,10 @@ public class Moment {
 
     public final void setHour(int hour) {
         this.hourProperty().set(hour);
+    }
+
+    public final StringProperty timerTitleProperty() {
+        return this.timerTitle;
     }
 
     public final IntegerProperty hourProperty() {
@@ -122,8 +138,23 @@ public class Moment {
         this.secondProperty().set(second);
     }
 
+    public final BooleanProperty timerRunningProperty() {
+        return this.timerRunning;
+    }
+
+    public final boolean getTimerRunning() {
+        return this.timerRunningProperty().get();
+    }
+
+    public final void setTimerRunning(final boolean second) {
+        this.timerRunningProperty().set(second);
+    }
+
 
     // Preview
+    public SimpleStringProperty previewTimerTitleProperty() {
+        return previewTimerTitle;
+    }
     public SimpleStringProperty previewTimeValueProperty() {
         return previewTimeValue;
     }
@@ -161,6 +192,9 @@ public class Moment {
     public SimpleStringProperty outputTimeValueProperty() {
         return outputTimeValue;
     }
+    public ObjectProperty<Color> colorPropProperty() {
+        return colorProp;
+    }
 
     public String getOutputTimeValue() {
         return outputTimeValueProperty().get();
@@ -168,6 +202,14 @@ public class Moment {
 
     public final void setOutputTimeValue(String value) {
         outputTimeValueProperty().set(value);
+    }
+
+    public final void setInitTimeValue(int hour, int minute, int seconds) {
+        initTimeValue = new int[]{hour, minute, seconds};
+    }
+
+    public final void setInitTimeValue() {
+        initTimeValue = new int[]{getHour(), getMinute(), getSecond()};
     }
 
     //CURRENT TIME VALUE
@@ -187,10 +229,6 @@ public class Moment {
     //TIMER RUNNING
     public boolean isTimerRunning() {
         return timerRunningProperty().get();
-    }
-
-    public BooleanProperty timerRunningProperty() {
-        return timerRunning;
     }
 
     //ALERT MESSAGE

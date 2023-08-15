@@ -1,33 +1,25 @@
 package org.anelda.wizston.countdowntimer.preset;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.input.KeyCombination;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.stage.Screen;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import org.anelda.wizston.countdowntimer.HelloApplication;
-import org.anelda.wizston.countdowntimer.database.DatabaseConnection;
+import javafx.stage.StageStyle;
 import org.anelda.wizston.countdowntimer.model.DataModel;
-import org.anelda.wizston.countdowntimer.output.OutputWrapperController;
+import org.anelda.wizston.countdowntimer.model.Preset;
+import org.anelda.wizston.countdowntimer.model.dao.PresetDao;
+import org.anelda.wizston.countdowntimer.preview.PreviewController;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 
 public class PresetController {
 
@@ -37,10 +29,22 @@ public class PresetController {
     @FXML
     public VBox presetListVBox;
 
+    @FXML
+    public HBox addUpdateHbox;
+
+    @FXML
+    public Button createToggleCreatePresetBtn;
+
+    @FXML
+    public TextField newPresetTitleTxt, newPresetHourTxt, newPresetMinTxt, newPresetSecTxt;
+
     private final SimpleStringProperty hourValue = new SimpleStringProperty("5");
 
     private DataModel model;
 
+    Node hghg;
+
+    ObservableList<Preset> presets;
 
     public void initModel(DataModel model) throws Exception {
         if (this.model != null) {
@@ -48,111 +52,106 @@ public class PresetController {
         }
         this.model = model ;
 
-        externalDisplay(true);
-
         hourValue.bind(this.model.getCurrentMoment().currentTimeValueProperty());
         labelTest2.textProperty().bind(hourValue);
         starta();
+
+
+        hghg = presetListVBox.getChildren().get(1);
+        presetListVBox.getChildren().remove(1);
     }
-
-
-    public void externalDisplay() throws IOException {
-        externalDisplay(false);
-    }
-
-    public void externalDisplay(Boolean fullScreen) throws IOException {
-
-        FXMLLoader mainOutputLoader = new FXMLLoader(HelloApplication.class.getResource("output/outputWrapper.fxml"));
-//        mainOutputLoader.setController(new OutputWrapperController());
-
-        OutputWrapperController outputWrapperController = new OutputWrapperController();
-        Callback<Class<?>, Object> controllerFactory = type -> outputWrapperController;
-
-        mainOutputLoader.setControllerFactory(controllerFactory);
-
-        AnchorPane mainOutputNode = mainOutputLoader.load();
-
-        AnchorPane.setTopAnchor(mainOutputNode, 0.0);
-        AnchorPane.setRightAnchor(mainOutputNode, 0.0);
-        AnchorPane.setLeftAnchor(mainOutputNode, 0.0);
-        AnchorPane.setBottomAnchor(mainOutputNode, 0.0);
-
-        OutputWrapperController mainOutputController = mainOutputLoader.getController();
-        mainOutputController.initModel(this.model);
-
-        mainOutputNode.widthProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldWidth, Number newWidth)
-            {
-                mainOutputController.liveTimerFontTracking.set(Font.font(newWidth.doubleValue() / 5));
-                mainOutputController.messageFontTracking.set(Font.font(newWidth.doubleValue() / 20));
-                mainOutputController.currentTimeFontTracking.set(Font.font(newWidth.doubleValue() / 40));
-                mainOutputController.titleFontTracking.set(Font.font(newWidth.doubleValue() / 40));
-            }
-        });
-
-        Stage primaryStage2 = new Stage();
-        Scene scene2 = new Scene(mainOutputNode);
-
-        ObservableList<Screen> screens = Screen.getScreens();//Get list of Screens
-
-        primaryStage2.setScene(scene2);
-        primaryStage2.setTitle("Fullscreen - Wizston:Countdown Timer 0.1");
-
-        if (fullScreen) {
-            Rectangle2D bounds = screens.get(screens.size() - 1).getVisualBounds();
-            primaryStage2.setX(bounds.getMinX());
-            primaryStage2.setY(bounds.getMinY());
-            primaryStage2.setFullScreen(true);
-            primaryStage2.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        }
-
-        primaryStage2.show();
-    }
-
-
 
     public void starta() throws Exception {
 
         StackPane stackpane = new StackPane();
 
-        DatabaseConnection databaseConnection = new DatabaseConnection();
-        Connection connection = databaseConnection.getDatabaseConnection();
+        presets = PresetDao.getPresets();
+        System.out.println(presets.size());
 
-        String presetQuery = "SELECT id, title, durationInMinutes, autoStart from presets";
-
-        Statement statement = connection.createStatement();
-        ResultSet presets = statement.executeQuery(presetQuery);
-
-        ObservableList<Preset> data = FXCollections.observableArrayList();
-
-        while (presets.next()) {
-            Integer id = presets.getInt("id");
-            String title = presets.getString("title");
-            Integer durationInMinutes = presets.getInt("durationInMinutes");
-            Boolean autoStart = presets.getBoolean("autoStart");
-
-            data.add(new Preset(id, title, durationInMinutes, autoStart));
-        }
+//        ObservableList<Preset> data = FXCollections.observableArrayList(presets);
 
         /* create list object */
-        ListView<Preset> listViewReference = new ListView<>(data);
+        ListView<Preset> listViewReference = new ListView<>(presets);
 
-        listViewReference.setCellFactory(new Callback<ListView<Preset>, ListCell<Preset>>() {
-            @Override
-            public ListCell<Preset> call(ListView<Preset> list) {
-                return new PresetListCell();
-            }
+        listViewReference.setCellFactory(list -> new PresetListCell());
+
+//        model.getCurrentMoment().previewTimeMinProperty().addListener((obs, oldPerson, newPerson) -> {
+//            if (newPerson == null) {
+//                listViewReference.getSelectionModel().clearSelection();
+//            } else {
+//                listViewReference.getSelectionModel().select(3);
+//            }
+//        });
+
+        listViewReference.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->
+        {
+
+            this.model.getCurrentMoment().previewTimerTitleProperty().setValue(String.valueOf(newSelection.title));
+            this.model.getCurrentMoment().previewTimeHourProperty().setValue(newSelection.hour);
+            this.model.getCurrentMoment().previewTimeMinProperty().setValue(newSelection.minute);
+            setPreview();
+
+//            Optional<Preset> preset = null;
+//            preset = PresetDao.getPresetById(newSelection.id);
+//            System.out.println(preset.get().id);
+            ///model.setCurrentMoment(newSelection);
         });
+
         stackpane.getChildren().add(listViewReference);
 
         // Create an 8 pixel margin around a listview in the stackpane
-        StackPane.setMargin(listViewReference, new Insets(8,8,8,8));
+        StackPane.setMargin(listViewReference, new Insets(0,8,8,8));
         /* creating vertical box to add item objects */
         presetListVBox.getChildren().add(stackpane);
         presetListVBox.setStyle("-fx-background-color: #181e24");
         presetListVBox.setFillWidth(true);
-        presetListVBox.setSpacing(40);
+//        presetListVBox.setSpacing(5);
+    }
+
+    public void setPreview() {
+        PreviewController.updatePreviewValues(model);
+    }
+
+    public void createPreset() {
+
+        openNewPresetModal();
+
+        if (presetListVBox.getChildren().get(1).equals(hghg)) {
+            presetListVBox.getChildren().remove(1);
+            createToggleCreatePresetBtn.textProperty().setValue("+ Create");
+        } else {
+            presetListVBox.getChildren().add(1, hghg);
+            createToggleCreatePresetBtn.textProperty().setValue("- Hide");
+        }
+    }
+
+    private void openNewPresetModal() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("newPreset.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image("/logo.png"));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNIFIED);
+            stage.setResizable(false);
+            stage.setTitle("NEW PRESET");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (Exception er) {
+            er.printStackTrace();
+        }
+    }
+
+    public void saveNewPreset() throws SQLException {
+        PresetDao.createPreset(newPresetTitleTxt.getText(), newPresetHourTxt.getText(), newPresetMinTxt.getText(), newPresetSecTxt.getText());
+        PresetDao.updatePresetList();
+
+        newPresetTitleTxt.setText("");
+        newPresetHourTxt.setText("");
+        newPresetMinTxt.setText("");
+        newPresetSecTxt.setText("");
+
+        createPreset();
+        System.out.println(presets.size());
     }
 }

@@ -33,6 +33,7 @@ public class OutputWrapperController {
     public Label labelTitle;
 
     public final ObjectProperty<Font> liveTimerFontTracking = new SimpleObjectProperty<Font>(Font.getDefault());
+    public final ObjectProperty<Color> colorProp = new SimpleObjectProperty<>(Color.valueOf("#e5e5e5"));
     public final ObjectProperty<Font> messageFontTracking = new SimpleObjectProperty<Font>(Font.getDefault());
     public final ObjectProperty<Font> currentTimeFontTracking = new SimpleObjectProperty<Font>(Font.getDefault());
     public final ObjectProperty<Font> titleFontTracking = new SimpleObjectProperty<Font>(Font.getDefault());
@@ -55,6 +56,8 @@ public class OutputWrapperController {
         labelLiveTimer.textProperty().bind(model.getCurrentMoment().outputTimeValue);
         liveTimerFontTracking.set(Font.font(114));
         labelLiveTimer.fontProperty().bind(liveTimerFontTracking);
+        model.getCurrentMoment().colorProp.set(Color.RED);
+        labelLiveTimer.textFillProperty().bind(model.getCurrentMoment().colorProp);
 
 
         labelShowingMessage.textProperty().bind(model.getCurrentMoment().alertMessage);
@@ -113,17 +116,18 @@ public class OutputWrapperController {
                             model.getCurrentMoment().secondProperty().setValue(model.getCurrentMoment().getSecond() - 1);
                         }
 
-                        if (model.getCurrentMoment().getHour() == 0 && model.getCurrentMoment().getMinute() < 5) {
-                            labelLiveTimer.setTextFill(Color.RED);
+                        if (model.getCurrentMoment().getHour() == 0 && model.getCurrentMoment().getMinute() < 3) {
+                            colorProp.setValue(Color.RED);
+                            model.getCurrentMoment().colorPropProperty().set(Color.RED);
                         } else {
-                            labelLiveTimer.setTextFill(Color.valueOf("#e5e5e5"));
+                            model.getCurrentMoment().colorPropProperty().set(Color.valueOf("#e5e5e5"));
                         }
                         model.getCurrentMoment().outputTimeValueProperty().set(String.format("%d:%02d:%02d", model.getCurrentMoment().getHour(), model.getCurrentMoment().getMinute(), model.getCurrentMoment().getSecond()));
                         //labelLiveTimer.setText(String.format("%d:%02d:%02d", startTimeHour, startTimeMin, startTimeSec));
 
                     }
                 });
-                labelLiveTimer.setTextFill(Color.valueOf("#e5e5e5"));
+//                labelLiveTimer.textFillProperty().set(Color.valueOf("#e5e5e5"));
                 //startTimeSec = 60; // Change to 60!
                 //startTimeMin = min - 1;
                 model.getCurrentMoment().timeline.setCycleCount(Timeline.INDEFINITE);
@@ -131,15 +135,26 @@ public class OutputWrapperController {
                 model.getCurrentMoment().timeline.playFromStart();
                 this.model.getCurrentMoment().timerRunningProperty().set(true);
             } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "You have not entered a time!");
-                alert.showAndWait();
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION, "You have not entered a time!");
+//                alert.showAndWait();
             }
         }else {
-            if (model.getCurrentMoment().getHour() > 0 || model.getCurrentMoment().getMinute() > 0) {
-                labelLiveTimer.setTextFill(Color.valueOf("#e5e5e5"));
-                model.getCurrentMoment().timeline.play();
+//            if (model.getCurrentMoment().getHour() > 0 || model.getCurrentMoment().getMinute() > 0) {
+//                colorProp.setValue(Color.RED);
+//                labelLiveTimer.textFillProperty().bind(colorProp);
+//
+////                labelLiveTimer.textFillProperty().set(Color.valueOf("#e5e5e5"));
+//                model.getCurrentMoment().timeline.play();
+//            }
+
+
+            //timeline.play(); //Playes from current position in the direction indicated by rate.
+
+            if (model.getCurrentMoment().getHour() == 0 && model.getCurrentMoment().getMinute() < 5) {
+                model.getCurrentMoment().colorPropProperty().set(Color.RED);
+            } else {
+                model.getCurrentMoment().colorPropProperty().set(Color.valueOf("#e5e5e5"));
             }
-            //timeline.play(); //Playes from current position in in the direction indicated by rate.
         }
 
     }

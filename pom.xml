@@ -6,39 +6,39 @@
 
     <groupId>org.anelda</groupId>
     <artifactId>IsakaCountdownTimer</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>IsakaCountdownTimer</name>
+    <version>0.1-SNAPSHOT</version>
+    <name>Wizston - Countdown Timer</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.7.1</junit.version>
+        <junit.version>5.8.2</junit.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>11.0.2</version>
+            <version>18</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>11.0.2</version>
+            <version>18</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
-            <version>11.0.2</version>
+            <version>18</version>
         </dependency>
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
-            <version>11.1.0</version>
+            <version>11.1.1</version>
         </dependency>
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
             <artifactId>formsfx-core</artifactId>
-            <version>11.3.2</version>
+            <version>11.5.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-javafx</artifactId>
-            <version>12.2.0</version>
+            <version>12.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.kordamp.bootstrapfx</groupId>
@@ -93,14 +93,13 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
             <version>1.18.22</version>
         </dependency>
+            <dependency>
+                <groupId>org.xerial</groupId>
+                <artifactId>sqlite-jdbc</artifactId>
+                <version>3.42.0.0</version>
+            </dependency>
     </dependencies>
 
     <build>
@@ -123,8 +122,90 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.anelda.wizston.countdowntimer/org.anelda.wizston.countdowntimer.HelloApplication
+                            <mainClass>org.anelda.wizston.countdowntimer/org.anelda.wizston.countdowntimer.Main
                             </mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.2.4</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                    <configuration>
+
+                        <filters>
+                            <filter>
+                                <artifact>junit:junit</artifact>
+                                <includes>
+                                    <include>org.sqlite.JDBC</include>
+                                </includes>
+                            </filter>
+                        </filters>
+                        <shadedArtifactAttached>true</shadedArtifactAttached>
+                        <transformers>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                <resource>META-INF/services/org.sqlite.JDBC</resource>
+                            </transformer>
+                            <transformer implementation=
+                                                 "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <mainClass>org.anelda.wizston.countdowntimer.Main</mainClass>
+                            </transformer>
+                        </transformers>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+            <plugin>
+                <groupId>io.github.fvarrui</groupId>
+                <artifactId>javapackager</artifactId>
+                <version>1.7.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <configuration>
+                            <!-- mandatory -->
+                            <mainClass>org.anelda.wizston.countdowntimer.MainTimerView</mainClass>
+                            <!-- optional -->
+                            <bundleJre>true</bundleJre>
+                            <generateInstaller>true</generateInstaller>
+                            <administratorRequired>false</administratorRequired>
+                            <platform>windows</platform>
+                            <bundleJre>true</bundleJre>
+                            <customizedJre>false</customizedJre>
+<!--                            <additionalResources>javafx.controls,javafx.fxml</additionalResources>-->
+<!--                            <additionalResources>-->
+<!--                                <additionalResource>file path</additionalResource>-->
+<!--                                <additionalResource>folder path</additionalResource>-->
+<!--&lt;!&ndash;                                <additionalResource>...</additionalResource>&ndash;&gt;-->
+<!--                            </additionalResources>-->
+<!--                            <linuxConfig>...</linuxConfig>-->
+<!--                            <macConfig>...</macConfig>-->
+                            <winConfig>
+
+                                <companyName>Anelda Inc.</companyName>
+                                <fileVersion>1.0.0.0</fileVersion>
+                                <productVersion>1.0.0.0</productVersion>
+                                <copyright>Anelda Inc</copyright>
+                                <icoFile>src/main/resources/logo.ico</icoFile>
+
+                                <disableDirPage>false</disableDirPage>
+                                <disableFinishedPage>false</disableFinishedPage>
+                                <disableRunAfterInstall>false</disableRunAfterInstall>
+                                <disableWelcomePage>false</disableWelcomePage>
+                                <createDesktopIconTask>true</createDesktopIconTask>
+                                <removeOldLibs>true</removeOldLibs>
+                            </winConfig>
+<!--                            <argument>-Bicon=src/main/resources/logo.ico</argument>-->
+<!--                            [...]-->
                         </configuration>
                     </execution>
                 </executions>
