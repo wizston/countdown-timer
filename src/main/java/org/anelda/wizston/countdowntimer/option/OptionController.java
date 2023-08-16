@@ -5,12 +5,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import org.controlsfx.control.ToggleSwitch;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -36,6 +37,9 @@ public class OptionController {
 
     @FXML
     public ComboBox renderOptionChoiceBox;
+
+    @FXML
+    public ToggleSwitch showSecondaryScreenToggleSwitch;
 
 
     public Stage primaryStage2 = new Stage();
@@ -66,14 +70,32 @@ public class OptionController {
         displaysComboBox.setItems(data);
         displaysComboBox.getSelectionModel().selectLast();
 
+        showSecondaryScreenToggleSwitch.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                renderOptionChoiceBox.setDisable(true);
+                displaysComboBox.setDisable(true);
+            } else {
+                renderOptionChoiceBox.setDisable(false);
+                displaysComboBox.setDisable(false);
+            }
+        });
+
         setActiveDisplayBtn.setOnAction((ActionEvent event) -> {
+            if (showSecondaryScreenToggleSwitch.isSelected()) {
+                primaryStage2.setFullScreen(false);
+                primaryStage2.close();
+            }
+
             primaryStage2.setFullScreen(false);
             primaryStage2.close();
-            try {
-                boolean fullScreen = renderOptionChoiceBox.getSelectionModel().getSelectedItem().equals("Full Screen");
-                this.externalDisplay(fullScreen, displaysComboBox.getSelectionModel().getSelectedIndex());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+
+            if (showSecondaryScreenToggleSwitch.isSelected()) {
+                try {
+                    boolean fullScreen = renderOptionChoiceBox.getSelectionModel().getSelectedItem().equals("Full Screen");
+                    this.externalDisplay(fullScreen, displaysComboBox.getSelectionModel().getSelectedIndex());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
