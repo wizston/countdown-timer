@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -32,6 +33,9 @@ public class OptionController {
 
     @FXML
     public Button setActiveDisplayBtn;
+
+    @FXML
+    public ComboBox renderOptionChoiceBox;
 
 
     public Stage primaryStage2 = new Stage();
@@ -63,13 +67,20 @@ public class OptionController {
         displaysComboBox.getSelectionModel().selectLast();
 
         setActiveDisplayBtn.setOnAction((ActionEvent event) -> {
+            primaryStage2.setFullScreen(false);
             primaryStage2.close();
             try {
-                this.externalDisplay(true, displaysComboBox.getSelectionModel().getSelectedIndex());
+                boolean fullScreen = renderOptionChoiceBox.getSelectionModel().getSelectedItem().equals("Full Screen");
+                this.externalDisplay(fullScreen, displaysComboBox.getSelectionModel().getSelectedIndex());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+
+        ObservableList<String> options = FXCollections.observableArrayList("Full Screen","Window");
+
+        renderOptionChoiceBox.setItems(options);
+        renderOptionChoiceBox.getSelectionModel().selectFirst();
     }
 
 

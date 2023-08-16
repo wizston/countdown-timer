@@ -108,17 +108,18 @@ public class MainTimerView extends Application  {
         Moment moment = new Moment(1,4,59);
         model.setCurrentMoment(moment);
 
-        outputController.initModel(model);
-        previewController.initModel(model);
-        presetController.initModel(model);
-        optionController.initModel(model);
-
         Scene scene = new Scene(rootGrid);
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("/logo.png"));
         primaryStage.setTitle("Wizston:Countdown Timer 0.1");
         primaryStage.setResizable(false);
+        primaryStage.setFullScreen(false);
         primaryStage.show();
+
+        outputController.initModel(model);
+        previewController.initModel(model);
+        presetController.initModel(model);
+        optionController.initModel(model);
 
         //Close every other windows when main window closes
         primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
