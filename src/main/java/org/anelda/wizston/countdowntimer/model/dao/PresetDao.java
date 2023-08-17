@@ -38,7 +38,7 @@ public class PresetDao {
         } catch (SQLException sqlException) {
 
             System.out.println(sqlException.getMessage());
-            if (sqlException.getMessage().equals("Missing database. Creating...")) {
+            if (sqlException.getMessage().equals("[SQLITE_ERROR] SQL error or missing database (no such table: presets)")) {
                 String newTableQuery = "create table presets (id INTEGER PRIMARY KEY AUTOINCREMENT, title text, hour int, minute int, sec int default 00, autoStart  TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
                 statement.execute(newTableQuery);
                 updatePresetList();
