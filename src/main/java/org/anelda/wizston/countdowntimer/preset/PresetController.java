@@ -29,15 +29,6 @@ public class PresetController {
     @FXML
     public VBox presetListVBox;
 
-    @FXML
-    public HBox addUpdateHbox;
-
-    @FXML
-    public Button createToggleCreatePresetBtn;
-
-    @FXML
-    public TextField newPresetTitleTxt, newPresetHourTxt, newPresetMinTxt, newPresetSecTxt;
-
     private final SimpleStringProperty hourValue = new SimpleStringProperty("5");
 
     private DataModel model;
@@ -55,10 +46,6 @@ public class PresetController {
         hourValue.bind(this.model.getCurrentMoment().currentTimeValueProperty());
         labelTest2.textProperty().bind(hourValue);
         starta();
-
-
-        hghg = presetListVBox.getChildren().get(1);
-        presetListVBox.getChildren().remove(1);
     }
 
     public void starta() throws Exception {
@@ -85,12 +72,12 @@ public class PresetController {
 
         listViewReference.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->
         {
-
-            this.model.getCurrentMoment().previewTimerTitleProperty().setValue(String.valueOf(newSelection.title));
-            this.model.getCurrentMoment().previewTimeHourProperty().setValue(newSelection.hour);
-            this.model.getCurrentMoment().previewTimeMinProperty().setValue(newSelection.minute);
-            setPreview();
-
+            if (newSelection != null) {
+                this.model.getCurrentMoment().previewTimerTitleProperty().setValue(String.valueOf(newSelection.title));
+                this.model.getCurrentMoment().previewTimeHourProperty().setValue(newSelection.hour);
+                this.model.getCurrentMoment().previewTimeMinProperty().setValue(newSelection.minute);
+                setPreview();
+            }
 //            Optional<Preset> preset = null;
 //            preset = PresetDao.getPresetById(newSelection.id);
 //            System.out.println(preset.get().id);
@@ -112,20 +99,7 @@ public class PresetController {
         PreviewController.updatePreviewValues(model);
     }
 
-    public void createPreset() {
-
-        openNewPresetModal();
-
-        if (presetListVBox.getChildren().get(1).equals(hghg)) {
-            presetListVBox.getChildren().remove(1);
-            createToggleCreatePresetBtn.textProperty().setValue("+ Create");
-        } else {
-            presetListVBox.getChildren().add(1, hghg);
-            createToggleCreatePresetBtn.textProperty().setValue("- Hide");
-        }
-    }
-
-    private void openNewPresetModal() {
+    public void openNewPresetModal() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("newPreset.fxml"));
             Parent root1 = fxmlLoader.load();
@@ -134,6 +108,7 @@ public class PresetController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UNIFIED);
             stage.setResizable(false);
+            stage.initOwner(presetListVBox.getScene().getWindow());
             stage.setTitle("NEW PRESET");
             stage.setScene(new Scene(root1));
             stage.show();
@@ -142,16 +117,5 @@ public class PresetController {
         }
     }
 
-    public void saveNewPreset() throws SQLException {
-        PresetDao.createPreset(newPresetTitleTxt.getText(), newPresetHourTxt.getText(), newPresetMinTxt.getText(), newPresetSecTxt.getText());
-        PresetDao.updatePresetList();
 
-        newPresetTitleTxt.setText("");
-        newPresetHourTxt.setText("");
-        newPresetMinTxt.setText("");
-        newPresetSecTxt.setText("");
-
-        createPreset();
-        System.out.println(presets.size());
-    }
 }

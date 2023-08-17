@@ -28,20 +28,12 @@ public class MainTimerView extends Application  {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        FXMLLoader fxmlLoader = new FXMLLoader(MainTimerView.class.getResource("main-timer-view.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load());
-//        stage.setTitle("Isaka Countdown Timer!");
-//        stage.setScene(scene);
-//        stage.show();
-
-
 
         BorderPane root = new BorderPane();
 
         GridPane rootGrid = new GridPane();
 
         FXMLLoader outputLoader = new FXMLLoader(getClass().getResource("output/output.fxml"));
-//        outputLoader.setController(new OutputController());
 
         OutputWrapperController outputWrapperController = new OutputWrapperController();
         OutputController outputController = new OutputController();

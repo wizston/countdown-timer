@@ -81,15 +81,12 @@ public class OptionController {
         });
 
         setActiveDisplayBtn.setOnAction((ActionEvent event) -> {
-            if (showSecondaryScreenToggleSwitch.isSelected()) {
-                primaryStage2.setFullScreen(false);
-                primaryStage2.close();
-            }
-
             primaryStage2.setFullScreen(false);
             primaryStage2.close();
 
             if (showSecondaryScreenToggleSwitch.isSelected()) {
+                primaryStage2.setFullScreen(false);
+                primaryStage2.close();
                 try {
                     boolean fullScreen = renderOptionChoiceBox.getSelectionModel().getSelectedItem().equals("Full Screen");
                     this.externalDisplay(fullScreen, displaysComboBox.getSelectionModel().getSelectedIndex());

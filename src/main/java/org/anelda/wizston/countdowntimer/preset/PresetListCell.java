@@ -123,7 +123,7 @@ public class PresetListCell extends ListCell<Preset> {
                     stage.initStyle(StageStyle.UNIFIED);
                     stage.setResizable(false);
                     stage.initOwner(this.getScene().getWindow());
-                    stage.setTitle("NEW PRESET");
+                    stage.setTitle("Edit PRESET");
                     stage.setScene(new Scene(root1));
                     stage.show();
                 } catch (Exception er) {

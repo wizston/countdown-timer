@@ -4,23 +4,32 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="213.0" prefWidth="346.0" style="-fx-background-color: #303038;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.anelda.wizston.countdowntimer.preset.PresetController">
-   <children>
-      <TextField layoutX="44.0" layoutY="41.0" prefHeight="25.0" prefWidth="257.0" promptText="Title" style="-fx-background-color: #181e24;" />
-      <TextField layoutX="44.0" layoutY="80.0" prefHeight="25.0" prefWidth="76.0" promptText="Hour" style="-fx-background-color: #181e24;" />
-      <TextField layoutX="135.0" layoutY="80.0" prefHeight="25.0" prefWidth="76.0" promptText="Minute" style="-fx-background-color: #181e24;" />
-      <TextField layoutX="225.0" layoutY="80.0" prefHeight="25.0" prefWidth="76.0" promptText="Hour" style="-fx-background-color: #181e24;" />
-      <Button layoutX="145.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #181e24;" text="CLOSE" textFill="RED">
-         <font>
-            <Font size="10.0" />
-         </font></Button>
-      <Button layoutX="100.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" style="-fx-background-color: #181e24;" text="SAVE NEW PRESET" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="10.0" />
-         </font></Button>
-      <Label layoutX="114.0" layoutY="10.0" text="ADD NEW PRESET" textFill="#939e93">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font></Label>
-   </children>
+<AnchorPane prefHeight="213.0" prefWidth="346.0" style="-fx-background-color: #303038;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.anelda.wizston.countdowntimer.preset.NewPreviewController">
+   <TextField fx:id="newPresetTitleTxt" layoutX="44.0" layoutY="41.0" prefHeight="25.0" prefWidth="257.0" promptText="Title" style="-fx-background-color: #181e24; -fx-text-inner-color: #FFFFFF;" />
+   <TextField fx:id="newPresetHourTxt" layoutX="44.0" layoutY="80.0" prefHeight="25.0" prefWidth="76.0" promptText="Hour" style="-fx-background-color: #181e24; -fx-text-inner-color: #FFFFFF;" />
+   <TextField fx:id="newPresetMinTxt" layoutX="135.0" layoutY="80.0" prefHeight="25.0" prefWidth="76.0" promptText="Minute" style="-fx-background-color: #181e24; -fx-text-inner-color: #FFFFFF;" />
+   <TextField fx:id="newPresetSecTxt" layoutX="225.0" layoutY="80.0" prefHeight="25.0" prefWidth="76.0" promptText="Second" style="-fx-background-color: #181e24; -fx-text-inner-color: #FFFFFF;" />
+
+   <Button fx:id="saveNewPresetModalBtn" layoutX="100.0" layoutY="122.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" style="-fx-background-color: #181e24;" text="SAVE NEW PRESET" textFill="#2fd700">
+      <font>
+         <Font name="System Bold" size="10.0" />
+      </font>
+   </Button>
+
+   <Button fx:id="closeNewPresetModalBtn" layoutX="145.0" layoutY="183.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #303038;" text="CLOSE" textFill="#ababab">
+      <font>
+         <Font size="10.0" />
+      </font>
+   </Button>
+
+   <Label layoutX="114.0" layoutY="10.0" text="ADD NEW PRESET" textFill="#939e93">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </Label>
+   <Label fx:id="requiredFieldLabel" alignment="CENTER" layoutX="-4.0" layoutY="158.0" prefHeight="13.0" prefWidth="346.0" text="All fields are required" textAlignment="CENTER" textFill="RED" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="158.0">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Label>
 </AnchorPane>
