@@ -2,7 +2,6 @@ package org.anelda.wizston.countdowntimer.preset;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,7 +10,6 @@ import org.anelda.wizston.countdowntimer.model.dao.PresetDao;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -37,21 +35,9 @@ public class NewPreviewController implements Initializable {
         });
 
         saveNewPresetModalBtn.setOnAction(event -> {
-            if (Objects.equals(newPresetTitleTxt.getText(), "") || newPresetHourTxt.getText().length() < 1 ||
-                    newPresetMinTxt.getText().length() < 1 || newPresetSecTxt.getText().length() < 1) {
 
-                requiredFieldLabel.setText("All fields are required");
-                requiredFieldLabel.setVisible(true);
-                return;
-            } else {
-                requiredFieldLabel.setVisible(false);
-            }
-
-            if (!isNumeric(newPresetHourTxt.getText()) || !isNumeric(newPresetMinTxt.getText()) || !isNumeric(newPresetSecTxt.getText())) {
-                requiredFieldLabel.setText("Please enter only numbers for time values");
-                requiredFieldLabel.setVisible(true);
-                return;
-            }
+            //Validate
+            if (!validateFields()) { return; }
 
             try {
                 PresetDao.createPreset(newPresetTitleTxt.getText(), newPresetHourTxt.getText(), newPresetMinTxt.getText(), newPresetSecTxt.getText());
@@ -69,6 +55,37 @@ public class NewPreviewController implements Initializable {
             Stage stage = (Stage) closeNewPresetModalBtn.getScene().getWindow();
             stage.close();
         });
+    }
+
+    public boolean validateFields() {
+
+        if (Objects.equals(newPresetTitleTxt.getText(), "") || newPresetMinTxt.getText().length() < 1) {
+            requiredFieldLabel.setText("Title & Minute fields are required");
+            requiredFieldLabel.setVisible(true);
+            return false;
+        } else {
+            requiredFieldLabel.setVisible(false);
+        }
+
+        if (!isNumeric(newPresetHourTxt.getText()) || !isNumeric(newPresetMinTxt.getText()) || !isNumeric(newPresetSecTxt.getText())) {
+            requiredFieldLabel.setText("Please enter only numbers for time values");
+            requiredFieldLabel.setVisible(true);
+            return false;
+        }
+
+        if (Double.parseDouble(newPresetHourTxt.getText()) > 99 || Double.parseDouble(newPresetMinTxt.getText()) > 60 || Double.parseDouble(newPresetSecTxt.getText()) > 60) {
+            requiredFieldLabel.setText("Please reduce the timer values");
+            requiredFieldLabel.setVisible(true);
+            return false;
+        }
+
+        if (Double.parseDouble(newPresetHourTxt.getText()) < 0 || Double.parseDouble(newPresetMinTxt.getText()) < 0 || Double.parseDouble(newPresetSecTxt.getText()) < 0) {
+            requiredFieldLabel.setText("Time fields cannot be lesser than 0");
+            requiredFieldLabel.setVisible(true);
+            return false;
+        }
+
+        return true;
     }
 
     public static boolean isNumeric(String str) {

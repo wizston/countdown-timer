@@ -53,5 +53,10 @@
         <Separator layoutY="274.0" opacity="0.11" prefHeight="12.0" prefWidth="546.0" />
       <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="70.0" text="SETTINGS" textFill="WHITE" />
       <Separator layoutX="2.0" layoutY="39.0" opacity="0.11" prefHeight="3.0" prefWidth="546.0" />
+      <Button fx:id="refreshDisplayBtn" layoutX="428.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #2d2d2d;" text="Refresh Display List" textFill="#d8d8d8">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Button>
     </Pane>
 </AnchorPane>

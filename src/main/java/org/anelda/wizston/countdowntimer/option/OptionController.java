@@ -33,7 +33,7 @@ public class OptionController {
     public ComboBox displaysComboBox;
 
     @FXML
-    public Button setActiveDisplayBtn;
+    public Button setActiveDisplayBtn, refreshDisplayBtn;
 
     @FXML
     public ComboBox renderOptionChoiceBox;
@@ -55,11 +55,7 @@ public class OptionController {
         }
         this.model = model;
 
-        int i = 1;
-        for (Screen screen: Screen.getScreens()) {
-            data.add(String.format("Display %s (Width: %s, Height: %s", i, screen.getBounds().getWidth(), screen.getBounds().getHeight()));
-            i++;
-        }
+        this.getDisplays();
 
 //        ObservableList<Screen> screens = Screen.getScreens();
 
@@ -96,12 +92,28 @@ public class OptionController {
             }
         });
 
+        refreshDisplayBtn.setOnAction(event -> {
+            System.out.println("Updating display list...");
+            data.clear();
+            this.getDisplays();
+
+            displaysComboBox.setItems(data);
+            displaysComboBox.getSelectionModel().selectLast();
+        });
+
         ObservableList<String> options = FXCollections.observableArrayList("Full Screen","Window");
 
         renderOptionChoiceBox.setItems(options);
         renderOptionChoiceBox.getSelectionModel().selectFirst();
     }
 
+    private void getDisplays() {
+        int i = 1;
+        for (Screen screen: Screen.getScreens()) {
+            data.add(String.format("Display %s (Width: %s, Height: %s", i, screen.getBounds().getWidth(), screen.getBounds().getHeight()));
+            i++;
+        }
+    }
 
 
     public void externalDisplay(Boolean fullScreen, Integer activeScreenIndex) throws IOException {
