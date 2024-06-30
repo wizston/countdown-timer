@@ -21,6 +21,7 @@ public class Moment {
 
     public final ObjectProperty<Color> colorProp = new SimpleObjectProperty<>(Color.valueOf("#e5e5e5"));
     public final SimpleStringProperty currentTimeValue = new SimpleStringProperty("00:00:00");
+    public final SimpleStringProperty endTimeValue = new SimpleStringProperty("00:00:00");
     public int[] initTimeValue = new int[]{0, 0, 0};
 
     private final IntegerProperty hour = new SimpleIntegerProperty();
@@ -223,6 +224,19 @@ public class Moment {
 
     public final void setCurrentTimeValue(String value) {
         currentTimeValueProperty().set(value);
+    }
+
+    //END TIME VALUE
+    public SimpleStringProperty endTimeValueProperty() {
+        return endTimeValue;
+    }
+
+    public String getEndTimeValue() {
+        return endTimeValueProperty().get();
+    }
+
+    public final void setEndTimeValue(String value) {
+        endTimeValueProperty().set(value);
     }
 
 

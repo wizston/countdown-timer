@@ -16,7 +16,9 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 import org.anelda.wizston.countdowntimer.model.DataModel;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.Objects;
 
 public class OutputWrapperController {
@@ -27,6 +29,8 @@ public class OutputWrapperController {
     public Label labelLiveTimer;
     @FXML
     public Label currentTimeLabel;
+    @FXML
+    public Label endTimeLabel;
     @FXML
     public Label labelShowingMessage;
     @FXML
@@ -41,6 +45,8 @@ public class OutputWrapperController {
 
     private int[] init;
 
+    private SimpleDateFormat df;
+
     private final SimpleStringProperty hourValue = new SimpleStringProperty("5");
 
     public void initModel(DataModel model) {
@@ -52,6 +58,8 @@ public class OutputWrapperController {
         currentTimeLabel.textProperty().bind(model.getCurrentMoment().currentTimeValue);
         currentTimeFontTracking.set(Font.font(26));
         currentTimeLabel.fontProperty().bind(currentTimeFontTracking);
+
+        endTimeLabel.textProperty().bind(model.getCurrentMoment().endTimeValue);
 
         labelLiveTimer.textProperty().bind(model.getCurrentMoment().outputTimeValue);
         liveTimerFontTracking.set(Font.font(114));
@@ -70,6 +78,7 @@ public class OutputWrapperController {
 
         startClock();
         startTimer();
+        setEndTimeLabel();
     }
 
     public void startTimer() {
@@ -185,5 +194,13 @@ public class OutputWrapperController {
         );
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
+    }
+    public void setEndTimeLabel() {
+        Calendar now = Calendar.getInstance();
+        df = new SimpleDateFormat("hh:mm aa"); // AM/PM format
+        now.add(Calendar.HOUR, this.model.getCurrentMoment().getHour());
+        now.add(Calendar.MINUTE, this.model.getCurrentMoment().getMinute());
+        now.add(Calendar.SECOND, this.model.getCurrentMoment().getSecond());
+        model.getCurrentMoment().setEndTimeValue(df.format(now.getTime()));
     }
 }

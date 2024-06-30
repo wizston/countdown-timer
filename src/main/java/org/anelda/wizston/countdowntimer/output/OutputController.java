@@ -43,6 +43,8 @@ public class OutputController {
             model.getCurrentMoment().colorPropProperty().set(Color.valueOf("#e5e5e5"));
             model.getCurrentMoment().timeline.play();
             this.model.getCurrentMoment().timerRunningProperty().set(true);
+
+            outputWrapperController.setEndTimeLabel();
         }
         //timeline.play(); //Playes from current position in in the direction indicated by rate.
     }
@@ -61,6 +63,8 @@ public class OutputController {
         model.getCurrentMoment().secondProperty().setValue(initTime[2]);
         model.getCurrentMoment().outputTimeValueProperty().set(String.format("%d:%02d:%02d", model.getCurrentMoment().getHour(), model.getCurrentMoment().getMinute(), model.getCurrentMoment().getSecond()));
         model.getCurrentMoment().timeline.play();
+
+        outputWrapperController.setEndTimeLabel();
     }
 
     public void clearMessage() {

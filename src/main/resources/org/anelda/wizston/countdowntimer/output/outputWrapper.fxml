@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="194.0" minWidth="568.0" prefHeight="288.0" prefWidth="550.0" style="-fx-background-color: #181e24;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.anelda.wizston.countdowntimer.output.OutputWrapperController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="194.0" minWidth="568.0" prefHeight="288.0" prefWidth="550.0" style="-fx-background-color: #181e24;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.anelda.wizston.countdowntimer.output.OutputWrapperController">
    <Label fx:id="labelLiveTimer" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutY="25.0" prefHeight="131.0" prefWidth="526.0" text="00:00:00" textAlignment="CENTER" textFill="#e5e5e5" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
       <font>
          <Font name="Cambria" size="114.0" />
@@ -24,9 +24,14 @@
          </Label>
       </children>
    </AnchorPane>
-   <Label fx:id="currentTimeLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="484.0" layoutY="227.0" text="00:00:00" textAlignment="RIGHT" textFill="#8d8d8d" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="14.0">
+   <Label fx:id="currentTimeLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="14.0" layoutY="229.0" text="00:00:00" textAlignment="RIGHT" textFill="#8d8d8d" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="462.0">
       <font>
-         <Font size="19.0" />
+         <Font size="25.0" />
+      </font>
+   </Label>
+   <Label fx:id="endTimeLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="444.0" layoutY="229.0" text="00:00:00" textAlignment="RIGHT" textFill="#8d8d8d">
+      <font>
+         <Font size="30.0" />
       </font>
    </Label>
 </AnchorPane>
