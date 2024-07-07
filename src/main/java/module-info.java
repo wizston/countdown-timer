@@ -18,4 +18,5 @@ module org.anelda.wizston.countdowntimer {
     exports org.anelda.wizston.countdowntimer.preset;
     exports org.anelda.wizston.countdowntimer.preview;
     exports org.anelda.wizston.countdowntimer.option;
+    exports org.anelda.wizston.countdowntimer.services;
 }

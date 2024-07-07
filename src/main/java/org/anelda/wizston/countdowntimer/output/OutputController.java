@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import org.anelda.wizston.countdowntimer.model.DataModel;
+import org.anelda.wizston.countdowntimer.services.TimerService;
 
 import java.time.LocalTime;
 import java.util.Objects;
@@ -24,6 +25,8 @@ public class OutputController {
     @FXML
     public OutputWrapperController outputWrapperController;
 
+    TimerService timerService;
+
     private int[] init;
 
     public void initModel(DataModel model) {
@@ -32,6 +35,7 @@ public class OutputController {
         }
         this.model = model;
         outputWrapperController.initModel(model);
+        timerService = new TimerService(model);
 
         pauseTimeBtn.visibleProperty().bind(model.getCurrentMoment().timerRunningProperty());
         startTimeBtn.visibleProperty().bind(model.getCurrentMoment().timerRunningProperty().not());
@@ -44,7 +48,7 @@ public class OutputController {
             model.getCurrentMoment().timeline.play();
             this.model.getCurrentMoment().timerRunningProperty().set(true);
 
-            outputWrapperController.setEndTimeLabel();
+            timerService.setEndTimeLabel();
         }
         //timeline.play(); //Playes from current position in in the direction indicated by rate.
     }
@@ -64,7 +68,7 @@ public class OutputController {
         model.getCurrentMoment().outputTimeValueProperty().set(String.format("%d:%02d:%02d", model.getCurrentMoment().getHour(), model.getCurrentMoment().getMinute(), model.getCurrentMoment().getSecond()));
         model.getCurrentMoment().timeline.play();
 
-        outputWrapperController.setEndTimeLabel();
+        timerService.setEndTimeLabel();
     }
 
     public void clearMessage() {

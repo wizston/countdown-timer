@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -29,9 +31,19 @@
          <Font size="25.0" />
       </font>
    </Label>
-   <Label fx:id="endTimeLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="444.0" layoutY="229.0" text="00:00:00" textAlignment="RIGHT" textFill="#8d8d8d">
-      <font>
-         <Font size="30.0" />
-      </font>
-   </Label>
+   <AnchorPane layoutX="398.0" layoutY="234.0" prefHeight="46.0" prefWidth="165.0" AnchorPane.bottomAnchor="-15.599999999999994" AnchorPane.rightAnchor="4.400000000000006" AnchorPane.topAnchor="234.0">
+         <HBox layoutX="-26.0" layoutY="7.0" prefHeight="62.0" prefWidth="179.0">
+            <ImageView fitHeight="36.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@/5983609.png" />
+            </ImageView>
+            <Label fx:id="endTimeLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="53.0" text="00:00:00" textAlignment="RIGHT" textFill="#8d8d8d">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </HBox>
+      <effect>
+         <Glow />
+      </effect>
+   </AnchorPane>
 </AnchorPane>

@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.anelda.wizston.countdowntimer.model.DataModel;
 import org.anelda.wizston.countdowntimer.output.OutputController;
+import org.anelda.wizston.countdowntimer.output.OutputWrapperController;
+import org.anelda.wizston.countdowntimer.services.TimerService;
 
 public class PreviewController {
 
@@ -45,6 +47,7 @@ public class PreviewController {
         simplePreset2.setOnAction((EventHandler) event -> setPresetTime(0, 10));
         simplePreset3.setOnAction((EventHandler) event -> setPresetTime(0, 25));
         simplePreset4.setOnAction((EventHandler) event -> setPresetTime(0, 45));
+
     }
 
     private void setPresetTime(int hour, int min) {
@@ -88,6 +91,8 @@ public class PreviewController {
         model.getCurrentMoment().timeline.play();
         model.getCurrentMoment().setTimerRunning(true);
 
+        TimerService timerService = new TimerService(model);
+        timerService.setEndTimeLabel();
         //Reset play-pause buttons
 //        outputController.resetPausePlayButtons();
     }

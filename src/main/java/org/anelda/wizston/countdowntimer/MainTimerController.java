@@ -22,6 +22,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import org.anelda.wizston.countdowntimer.output.OutputWrapperController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,6 +35,9 @@ public class MainTimerController implements Initializable {
 
     @FXML
     private HelloController alternatePaneComponentController;
+
+    @FXML
+    public OutputWrapperController outputWrapperController;
 
     @FXML
     private Label labelPreviewTimer;
@@ -86,6 +90,8 @@ public class MainTimerController implements Initializable {
         if(!isRunning) { //Added a if statement to switch on "running"
             if (startTimeHour > 0 || startTimeMin > 0) {
                 labelLiveTimer.setTextFill(Color.valueOf("#e5e5e5"));
+
+                outputWrapperController.setEndTimeLabel();
 
                 KeyFrame keyframe = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
                     @Override

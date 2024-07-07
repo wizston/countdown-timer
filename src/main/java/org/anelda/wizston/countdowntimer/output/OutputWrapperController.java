@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import org.anelda.wizston.countdowntimer.model.DataModel;
+import org.anelda.wizston.countdowntimer.services.TimerService;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -47,6 +48,9 @@ public class OutputWrapperController {
 
     private SimpleDateFormat df;
 
+
+    TimerService timerService;
+
     private final SimpleStringProperty hourValue = new SimpleStringProperty("5");
 
     public void initModel(DataModel model) {
@@ -54,6 +58,8 @@ public class OutputWrapperController {
             throw new IllegalStateException("Model can only be initialized once");
         }
         this.model = model;
+
+        this.timerService = new TimerService(model);
 
         currentTimeLabel.textProperty().bind(model.getCurrentMoment().currentTimeValue);
         currentTimeFontTracking.set(Font.font(26));
@@ -196,11 +202,6 @@ public class OutputWrapperController {
         clock.play();
     }
     public void setEndTimeLabel() {
-        Calendar now = Calendar.getInstance();
-        df = new SimpleDateFormat("hh:mm aa"); // AM/PM format
-        now.add(Calendar.HOUR, this.model.getCurrentMoment().getHour());
-        now.add(Calendar.MINUTE, this.model.getCurrentMoment().getMinute());
-        now.add(Calendar.SECOND, this.model.getCurrentMoment().getSecond());
-        model.getCurrentMoment().setEndTimeValue(df.format(now.getTime()));
+        this.timerService.setEndTimeLabel();
     }
 }
