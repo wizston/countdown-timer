@@ -18,6 +18,7 @@ public class Moment {
 
 
     public final SimpleStringProperty outputTimeValue = new SimpleStringProperty("00:00:00");
+    public final SimpleStringProperty overTimeValue = new SimpleStringProperty("⚠\uFE0FOvertime: 00:00:00");
 
     public final ObjectProperty<Color> colorProp = new SimpleObjectProperty<>(Color.valueOf("#e5e5e5"));
     public final SimpleStringProperty currentTimeValue = new SimpleStringProperty("00:00:00");
@@ -27,12 +28,17 @@ public class Moment {
     private final IntegerProperty minute = new SimpleIntegerProperty();
     private final IntegerProperty second = new SimpleIntegerProperty();
 
+    private final IntegerProperty otHour = new SimpleIntegerProperty();
+    private final IntegerProperty otMinute = new SimpleIntegerProperty();
+    private final IntegerProperty otSecond = new SimpleIntegerProperty();
+
     public final SimpleStringProperty alertMessage = new SimpleStringProperty();
 
     public final SimpleStringProperty timerTitle = new SimpleStringProperty("");
 
     private final BooleanProperty timerRunning = new SimpleBooleanProperty(false);
 
+    private final BooleanProperty timeElapsed = new SimpleBooleanProperty(false);
 
     public final Timeline timeline = new Timeline();
 
@@ -95,10 +101,6 @@ public class Moment {
         this.timerTitleProperty().set(title);
     }
 
-    public final int getHour() {
-        return hourProperty().get();
-    }
-
     public final void setHour(int hour) {
         this.hourProperty().set(hour);
     }
@@ -111,7 +113,12 @@ public class Moment {
         return this.hour;
     }
 
+    public final int getHour() {
+        return hourProperty().get();
+    }
 
+
+    // Main countdown Minute
     public final IntegerProperty minuteProperty() {
         return this.minute;
     }
@@ -124,6 +131,46 @@ public class Moment {
         this.minuteProperty().set(minute);
     }
 
+
+    /**
+     * OVERTIME TIME PROPERTIES
+     * @return
+     */
+
+
+    public final IntegerProperty otHourProperty() {
+        return this.otHour;
+    }
+
+    public final int getOtHour() {
+        return otHourProperty().get();
+    }
+
+    // Overtime Minute
+    public final IntegerProperty otMinuteProperty() {
+        return this.otMinute;
+    }
+
+    public final int getOtMinute() {
+        return this.otMinuteProperty().get();
+    }
+
+    public final void setOtMinute(final int minute) {
+        this.otMinuteProperty().set(minute);
+    }
+
+
+    public final IntegerProperty otSecondProperty() {
+        return this.otSecond;
+    }
+
+    public final int getOtSecond() {
+        return this.otSecondProperty().get();
+    }
+
+    public final void setOtSecond(final int second) {
+        this.otSecondProperty().set(second);
+    }
 
 
     public final IntegerProperty secondProperty() {
@@ -142,12 +189,24 @@ public class Moment {
         return this.timerRunning;
     }
 
+    public final BooleanProperty timeElapsedProperty() {
+        return this.timeElapsed;
+    }
+
     public final boolean getTimerRunning() {
         return this.timerRunningProperty().get();
     }
 
     public final void setTimerRunning(final boolean second) {
         this.timerRunningProperty().set(second);
+    }
+
+    public final boolean getTimeElapsed() {
+        return this.timeElapsedProperty().get();
+    }
+
+    public final void setTimeElapsed(final boolean value) {
+        this.timeElapsedProperty().set(value);
     }
 
 
@@ -192,6 +251,11 @@ public class Moment {
     public SimpleStringProperty outputTimeValueProperty() {
         return outputTimeValue;
     }
+
+    //OUTPUT
+    public SimpleStringProperty overTimeValueProperty() {
+        return overTimeValue;
+    }
     public ObjectProperty<Color> colorPropProperty() {
         return colorProp;
     }
@@ -229,6 +293,21 @@ public class Moment {
     //TIMER RUNNING
     public boolean isTimerRunning() {
         return timerRunningProperty().get();
+    }
+
+    //TIMER RUNNING
+    public boolean isTimeElapsed() {
+        return timeElapsedProperty().get();
+    }
+
+    public final void resetTimer() {
+        hourProperty().setValue(0);
+        minuteProperty().setValue(0);
+        secondProperty().setValue(0);
+        timeline.stop();
+
+        // Reset display also
+        outputTimeValueProperty().set(String.format("%d:%02d:%02d", getHour(), getMinute(), getSecond()));
     }
 
     //ALERT MESSAGE

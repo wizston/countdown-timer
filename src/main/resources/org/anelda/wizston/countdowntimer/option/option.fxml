@@ -6,19 +6,20 @@
 <?import javafx.scene.text.*?>
 <?import org.controlsfx.control.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #303038;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #303038;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
     <Pane layoutX="26.0" layoutY="44.0" prefHeight="317.0" prefWidth="546.0" style="-fx-background-color: #181e24;" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="44.0">
 
 
         <GridPane layoutY="38.0" prefHeight="236.0" prefWidth="550.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="151.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="151.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="435.0" minWidth="10.0" prefWidth="399.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="114.0" minHeight="0.0" prefHeight="38.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="165.0" minHeight="10.0" prefHeight="83.0" valignment="CENTER" vgrow="SOMETIMES" />
             </rowConstraints>
@@ -35,7 +36,7 @@
                      <Font size="13.0" />
                  </font>
             <GridPane.margin>
-               <Insets right="10.0" />
+               <Insets />
             </GridPane.margin>
              </Label>
          <Label text="Render: " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
@@ -44,6 +45,8 @@
                     <Insets left="10.0" />
                 </GridPane.margin>
             </ComboBox>
+         <Label text="Count Up After Overtime:" textFill="WHITE" GridPane.rowIndex="4" />
+         <ToggleSwitch fx:id="overtimeToggleSwitch" prefHeight="40.0" prefWidth="44.0" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         </GridPane>
         <Button fx:id="setActiveDisplayBtn" layoutX="492.0" layoutY="286.0" mnemonicParsing="false" style="-fx-background-color: #2d2d2d;" text="Apply" textFill="#d8d8d8">
             <font>

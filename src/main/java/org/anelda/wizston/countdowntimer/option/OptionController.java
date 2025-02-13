@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import org.controlsfx.control.ToggleSwitch;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -25,6 +26,7 @@ import org.anelda.wizston.countdowntimer.HelloApplication;
 import org.anelda.wizston.countdowntimer.model.DataModel;
 import org.anelda.wizston.countdowntimer.output.OutputWrapperController;
 
+import javax.swing.text.LabelView;
 import java.io.IOException;
 
 public class OptionController {
@@ -40,6 +42,8 @@ public class OptionController {
 
     @FXML
     public ToggleSwitch showSecondaryScreenToggleSwitch;
+
+    public ToggleSwitch overtimeToggleSwitch;
 
 
     public Stage primaryStage2 = new Stage();
@@ -73,6 +77,20 @@ public class OptionController {
             } else {
                 renderOptionChoiceBox.setDisable(false);
                 displaysComboBox.setDisable(false);
+            }
+        });
+
+        overtimeToggleSwitch.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            model.getCurrentPreference().setCountUpOverTime(newValue);
+
+            if (newValue && model.getCurrentMoment().isTimeElapsed()) {
+                model.getCurrentPreference().showOvertimeProperty().set(true);
+                model.getCurrentMoment().timeline.play();
+            } else if (!newValue && model.getCurrentMoment().isTimeElapsed()) {
+                model.getCurrentMoment().resetTimer();
+                model.getCurrentPreference().showOvertimeProperty().set(false);
+            } else {
+                model.getCurrentPreference().showOvertimeProperty().set(false);
             }
         });
 
@@ -134,17 +152,38 @@ public class OptionController {
 
         OutputWrapperController mainOutputController = mainOutputLoader.getController();
         mainOutputController.initModel(this.model);
+        mainOutputController.labelShowingMessage.setWrapText(true);
 
         mainOutputNode.widthProperty().addListener(new ChangeListener<Number>()
         {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldWidth, Number newWidth)
             {
-                mainOutputController.liveTimerFontTracking.set(Font.font(newWidth.doubleValue() / 5));
-                mainOutputController.messageFontTracking.set(Font.font(newWidth.doubleValue() / 20));
-                mainOutputController.currentTimeFontTracking.set(Font.font(newWidth.doubleValue() / 40));
+                mainOutputController.labelShowingMessage.setWrapText(true);
+                mainOutputController.liveTimerFontTracking.set(Font.font("Calibri Bold",newWidth.doubleValue() / 4));
+                mainOutputController.messageFontTracking.set(Font.font(newWidth.doubleValue() / 25));
+//                mainOutputController.messageFontTracking.set();
+                mainOutputController.overTimeFontTracking.set(Font.font("Calibri Bold",newWidth.doubleValue() / 15));
+                mainOutputController.currentTimeFontTracking.set(Font.font(newWidth.doubleValue() / 35));
                 mainOutputController.titleFontTracking.set(Font.font(newWidth.doubleValue() / 40));
             }
+        });
+
+        mainOutputNode.heightProperty().addListener((obs, oldVal, newVal) -> {
+            double totalHeight = newVal.doubleValue();
+
+            // For example, anchor the button so it's 10% from the bottom
+            double bottomOffset = totalHeight * 0.13; // 10%
+
+            Label labelView = mainOutputController.labelShowingMessage;
+            labelView.setMinHeight(newVal.doubleValue() / 3);
+            labelView.setWrapText(true);
+
+            AnchorPane bottomAnchorPaneNode = mainOutputController.bottomAnchorPane;
+//            AnchorPane.setTopAnchor(bottomAnchorPaneNode, 200.0);
+//            AnchorPane.setRightAnchor(bottomAnchorPaneNode, 550.0);
+//            AnchorPane.setLeftAnchor(bottomAnchorPaneNode, 70.0);
+            AnchorPane.setBottomAnchor(bottomAnchorPaneNode, bottomOffset);
         });
 
         Scene scene2 = new Scene(mainOutputNode);

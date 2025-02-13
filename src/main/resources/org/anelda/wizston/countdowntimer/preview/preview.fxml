@@ -5,23 +5,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="600.0" scaleShape="false" style="-fx-background-color: #303038;">
       <Label layoutX="28.0" layoutY="14.0" text="Preview" textFill="WHITE" />
       <Pane layoutX="25.0" layoutY="37.0" prefHeight="288.0" prefWidth="550.0" style="-fx-background-color: #181e24;">
-         <Label fx:id="labelPreviewHour" layoutX="47.0" layoutY="31.0" text="02" textFill="#e5e5e5">
+         <Label fx:id="labelPreviewHour" layoutX="56.0" layoutY="50.0" text="02" textFill="#e5e5e5">
             <font>
-               <Font name="Fira Code Medium" size="96.0" />
+               <Font name="Calibri Bold" size="96.0" />
             </font>
          </Label>
-         <Label fx:id="labelPreviewMin" layoutX="214.0" layoutY="31.0" text="34" textFill="#e5e5e5">
+         <Label fx:id="labelPreviewMin" layoutX="219.0" layoutY="50.0" text="34" textFill="#e5e5e5">
             <font>
-               <Font name="Fira Code Medium" size="96.0" />
+               <Font name="Calibri Bold" size="96.0" />
             </font>
          </Label>
-         <Label fx:id="labelPreviewSec" layoutX="380.0" layoutY="31.0" text="00" textFill="#e5e5e5">
+         <Label fx:id="labelPreviewSec" layoutX="391.0" layoutY="50.0" text="00" textFill="#e5e5e5">
             <font>
-               <Font name="Fira Code Medium" size="96.0" />
+               <Font name="Calibri Bold" size="96.0" />
             </font>
          </Label>
          <Button fx:id="increaseHourBtn" layoutX="167.0" layoutY="69.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
@@ -122,9 +122,15 @@
                <Font size="9.0" />
             </font>
          </Button>
-         <Label fx:id="previewTimerTitle" layoutX="14.0" layoutY="14.0" text="Label" textFill="#c6c6c6">
+         <Label fx:id="previewTimerTitle" layoutX="35.0" layoutY="20.0" text="Label" textFill="#c6c6c6">
             <font>
-               <Font size="18.0" />
+               <Font size="19.0" />
+            </font>
+         </Label>
+         <TextField fx:id="txtPreviewTimerTitle" layoutY="22.0" prefHeight="25.0" prefWidth="353.0" style="-fx-background-color: #181e24; -fx-text-inner-color: #FFFFFF;" />
+         <Label fx:id="previewTimeEnd" layoutX="244.0" layoutY="196.0" text="Ends at: 00:00" textFill="#727272">
+            <font>
+               <Font name="System Bold" size="13.0" />
             </font>
          </Label>
       </Pane>

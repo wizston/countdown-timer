@@ -32,4 +32,27 @@ public class DataModel {
     public ObservableList<Moment> getMomentList() {
         return momentList;
     }
+
+
+
+
+
+
+
+    private final ObjectProperty<UserPreferences> currentPreference = new SimpleObjectProperty<>(new UserPreferences());
+
+    public ObjectProperty<UserPreferences> currentPreferenceProperty() {
+        return currentPreference ;
+    }
+
+    public final UserPreferences getCurrentPreference() {
+        return currentPreferenceProperty().get();
+    }
+
+    public final void setCurrentPreference(UserPreferences userPreferences) {
+        currentPreferenceProperty().set(userPreferences);
+
+        // set initial value for reset purpose
+        getCurrentPreference().countUpOverTimeProperty().set(true);
+    }
 }

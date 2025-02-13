@@ -7,7 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.anelda.wizston.countdowntimer.model.DataModel;
-import org.anelda.wizston.countdowntimer.output.OutputController;
+
+import java.time.LocalTime;
 
 public class PreviewController {
 
@@ -29,7 +30,10 @@ public class PreviewController {
     public TextField txtPreviewMessage;
 
     @FXML
-    public Label previewTimerTitle, labelPreviewHour, labelPreviewMin, labelPreviewSec;
+    public Label previewTimerTitle, labelPreviewHour, labelPreviewMin, labelPreviewSec, previewTimeEnd;
+
+    @FXML
+    public TextField txtPreviewTimerTitle;
 
 //    @FXML
 //    public OutputController outputController;
@@ -69,6 +73,7 @@ public class PreviewController {
         setPreview();
 
         previewTimerTitle.textProperty().bind(model.getCurrentMoment().previewTimerTitle);
+        txtPreviewTimerTitle.textProperty().bind(model.getCurrentMoment().previewTimerTitle);
         labelPreviewHour.textProperty().bind(model.getCurrentMoment().previewTimeHourValue);
         labelPreviewMin.textProperty().bind(model.getCurrentMoment().previewTimeMinValue);
         labelPreviewSec.textProperty().bind(model.getCurrentMoment().previewTimeSecValue);
@@ -79,6 +84,8 @@ public class PreviewController {
         this.model.getCurrentMoment().setHour(this.model.getCurrentMoment().getPreviewTimeHour());
         this.model.getCurrentMoment().setMinute(this.model.getCurrentMoment().getPreviewTimeMin());
         this.model.getCurrentMoment().setSecond(this.model.getCurrentMoment().getPreviewTimeSec());
+
+        model.getCurrentMoment().setTimeElapsed(false);
 
         model.getCurrentMoment().setOutputTimeValue((String.format("%d:%02d:%02d", this.model.getCurrentMoment().getHour(), this.model.getCurrentMoment().previewTimeMinProperty().getValue(), this.model.getCurrentMoment().previewTimeSecProperty().getValue())));
 
@@ -103,6 +110,7 @@ public class PreviewController {
 
     public void setPreview() {
         updatePreviewValues(model);
+        previewTimeEnd();
     }
 
     public static void updatePreviewValues(DataModel model) {
@@ -112,6 +120,16 @@ public class PreviewController {
         model.getCurrentMoment().setPreviewTimeSecValue((String.format("%02d", model.getCurrentMoment().previewTimeSecProperty().getValue())));
 
         model.getCurrentMoment().previewTimeSecProperty().setValue(0);
+    }
+
+    public void previewTimeEnd() {
+        LocalTime currentTime = LocalTime.now();
+
+        LocalTime hh = currentTime.plusHours(model.getCurrentMoment().getPreviewTimeHour())
+                        .plusMinutes(model.getCurrentMoment().getPreviewTimeMin())
+                                .plusSeconds(model.getCurrentMoment().getPreviewTimeSec());
+
+        previewTimeEnd.setText(String.format("Ends at: %d:%02d", hh.getHour(), hh.getMinute()));
     }
 
 

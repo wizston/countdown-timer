@@ -16,6 +16,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import org.anelda.wizston.countdowntimer.model.DataModel;
 import org.anelda.wizston.countdowntimer.model.Moment;
+import org.anelda.wizston.countdowntimer.model.UserPreferences;
 import org.anelda.wizston.countdowntimer.option.OptionController;
 import org.anelda.wizston.countdowntimer.output.OutputController;
 import org.anelda.wizston.countdowntimer.output.OutputWrapperController;
@@ -97,7 +98,7 @@ public class MainTimerView extends Application  {
         OptionController optionController = optionLoader.getController();
 
         DataModel model = new DataModel();
-        Moment moment = new Moment(1,4,59);
+        Moment moment = new Moment(0, 0,10);
         model.setCurrentMoment(moment);
 
         Scene scene = new Scene(rootGrid);

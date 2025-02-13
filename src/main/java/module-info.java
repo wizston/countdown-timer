@@ -10,6 +10,7 @@ module org.anelda.wizston.countdowntimer {
 //    requires eu.hansolo.tilesfx;
     requires java.sql;
     requires org.controlsfx.controls;
+    requires java.desktop;
 
 //    opens org.anelda.wizston.countdowntimer to javafx.fxml;
     exports org.anelda.wizston.countdowntimer;
