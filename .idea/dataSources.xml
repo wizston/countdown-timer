@@ -16,7 +16,7 @@
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="nnFPNxpz16fY13Lusvt9" uuid="0d6cf92b-0d13-48a2-a90f-97d1ae147c99">
-      <driver-ref>5188eb35-1ad2-42ed-8783-92e2299caab4</driver-ref>
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Projects\Java\IsakaCountdownTimer\src\main\resources\org\anelda\wizston\countdowntimer\database\nnFPNxpz16fY13Lusvt9.db</jdbc-url>
@@ -31,7 +31,7 @@
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$USER_HOME$/.wizstonCountdown/nnFPNxpz16fY13Lusvt9</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$USER_HOME$/.wizstonCountDown/nnFPNxpz16fY13Lusvt9</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
