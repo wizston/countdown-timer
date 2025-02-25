@@ -101,6 +101,7 @@ public class OutputWrapperController {
 
         init = new int[]{model.getCurrentMoment().getHour(), model.getCurrentMoment().getMinute(), model.getCurrentMoment().getSecond()};
 
+        model.getCurrentMoment().resetOverTimer();
         model.getCurrentMoment().setTimeElapsed(false);
 
         if(!this.model.getCurrentMoment().isTimerRunning()) { //Added an if statement to switch on "running"
@@ -227,6 +228,8 @@ public class OutputWrapperController {
         }
 
         model.getCurrentMoment().timeElapsedProperty().addListener((observable, oldValue, newValue) -> {
+
+            model.getCurrentMoment().resetOverTimer();
             if (newValue) {
                 fadeTransition.play();
             } else {

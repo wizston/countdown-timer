@@ -310,6 +310,13 @@ public class Moment {
         outputTimeValueProperty().set(String.format("%d:%02d:%02d", getHour(), getMinute(), getSecond()));
     }
 
+    public final void resetOverTimer() {
+        otHourProperty().setValue(0);
+        otMinuteProperty().setValue(0);
+        otSecondProperty().setValue(0);
+        overTimeValueProperty().set("⚠Overtime: 00:00:00");
+    }
+
     //ALERT MESSAGE
     public SimpleStringProperty alertMessageProperty() {
         return alertMessage;
