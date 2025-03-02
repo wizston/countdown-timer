@@ -140,7 +140,7 @@ public class OutputWrapperController {
                             }
 
 
-                            model.getCurrentMoment().overTimeValueProperty().set(String.format("⚠\uFE0FOvertime: %d:%02d:%02d",
+                            model.getCurrentMoment().overTimeValueProperty().set(String.format("⚠Overtime: %d:%02d:%02d",
                                     model.getCurrentMoment().getOtHour(),
                                     model.getCurrentMoment().getOtMinute(),
                                     model.getCurrentMoment().getOtSecond())

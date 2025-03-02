@@ -145,6 +145,8 @@ public class OptionController {
 
         AnchorPane mainOutputNode = mainOutputLoader.load();
 
+        mainOutputNode.setMinHeight(494.0);
+        mainOutputNode.setMinWidth(868.0);
         AnchorPane.setTopAnchor(mainOutputNode, 0.0);
         AnchorPane.setRightAnchor(mainOutputNode, 0.0);
         AnchorPane.setLeftAnchor(mainOutputNode, 0.0);
@@ -191,7 +193,7 @@ public class OptionController {
         ObservableList<Screen> screens = Screen.getScreens();//Get list of Screens
 
         primaryStage2.setScene(scene2);
-        primaryStage2.setTitle("Fullscreen - Wizston:Countdown Timer 0.1");
+        primaryStage2.setTitle("Wizston:Countdown Timer Window");
 
         if (Boolean.TRUE.equals(fullScreen) && screens.size() > activeScreenIndex) {
             Rectangle2D bounds = screens.get(activeScreenIndex).getVisualBounds();

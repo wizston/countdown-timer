@@ -18,7 +18,7 @@ public class Moment {
 
 
     public final SimpleStringProperty outputTimeValue = new SimpleStringProperty("00:00:00");
-    public final SimpleStringProperty overTimeValue = new SimpleStringProperty("⚠\uFE0FOvertime: 00:00:00");
+    public final SimpleStringProperty overTimeValue = new SimpleStringProperty("⚠Overtime: 00:00:00");
 
     public final ObjectProperty<Color> colorProp = new SimpleObjectProperty<>(Color.valueOf("#e5e5e5"));
     public final SimpleStringProperty currentTimeValue = new SimpleStringProperty("00:00:00");
